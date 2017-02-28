@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -35,10 +34,9 @@ public class UserController {
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)//TODO сделать проверку на id и 404
     @ResponseBody
-    public User getStudent(@PathVariable("id") int id, @RequestBody User user, HttpServletResponse response) {
+    public User getStudent(@PathVariable("id") int id, @RequestBody User user) {
         user.setId(id);
         userService.update(user);
-        response.setHeader("Access-Control-Allow-Headers",  "Content-Type");
         return userService.getAllForId(id);
     }
 
