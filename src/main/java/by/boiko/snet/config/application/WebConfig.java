@@ -29,7 +29,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedMethods("PUT", "POST", "DELETE", "GET")
-                .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept");
+                .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept", "application/json; charset=utf8");
 
     }
 
