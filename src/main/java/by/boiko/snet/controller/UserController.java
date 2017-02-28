@@ -14,7 +14,7 @@ import java.util.List;
  * The controller determines methods for access to User service.
  */
 
-@CrossOrigin(origins = "https://serene-wave-27221.herokuapp.com", maxAge = 3600)
+//@CrossOrigin(origins = "https://serene-wave-27221.herokuapp.com", maxAge = 3600)
 @Controller
 public class UserController {
 
