@@ -28,7 +28,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedHeaders("*");
+                .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept");
 
     }
 
