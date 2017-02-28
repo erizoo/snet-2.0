@@ -16,12 +16,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Pattern(regexp = "^[A-Za-z][a-z]+$")
     @Column(name = "LAST_NAME")
     @Size(max = 20, message = "value lastName - exceeds the permissible value")
     private String lastName;
 
-    @Pattern(regexp = "^[A-Za-z][a-z]+$")
     @Column(name = "FIRST_NAME")
     @Size(max = 20, message = "value firstName - exceeds the permissible value")
     private String firstName;
@@ -33,7 +31,6 @@ public class User {
 
     @Column(name = "SEX")
     private String sex; //TODO подумать как реализовать по-другому
-
 
     @Column(name = "CITY")
     @Size(max = 20, message = "value city - exceeds the permissible value")
