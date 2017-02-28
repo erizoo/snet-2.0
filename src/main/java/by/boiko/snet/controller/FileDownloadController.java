@@ -2,6 +2,7 @@ package by.boiko.snet.controller;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.stereotype.Controller;
@@ -26,16 +27,17 @@ public class FileDownloadController
                                      HttpServletResponse response,
                                      @PathVariable("fileName") String fileName) throws FileNotFoundException, DocumentException {
         //If user is not authorized - he should be thrown out from here itself
-        Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(fileName));
+
+        //Authorized user will download the file
+        String dataDirectory = request.getServletContext().getRealPath("/WEB-INF/reports/");
+        Path file = Paths.get(dataDirectory, fileName);
+        Document document = new Document(PageSize.A4, 50, 50, 50, 50);
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dataDirectory));
         document.open();
         document.add(new Paragraph("A Hello World PDF document."));
         document.close();
         writer.close();
-        byte [] data = new byte[8192];
-        //Authorized user will download the file
-        String dataDirectory = request.getServletContext().getRealPath("/WEB-INF/downloads/pdf/");
-        Path file = Paths.get(dataDirectory, fileName);
+
         if (Files.exists(file))
         {
             response.setContentType("application/pdf");
@@ -44,7 +46,6 @@ public class FileDownloadController
             try
             {
                 Files.copy(file, response.getOutputStream());
-                response.getOutputStream().write(data);
                 response.getOutputStream().flush();
             }
             catch (IOException ex) {
