@@ -4,16 +4,17 @@ package by.boiko.snet.controller;
 import by.boiko.snet.model.User;
 import by.boiko.snet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
  * The controller determines methods for access to User service.
  */
 
-@Controller
+@CrossOrigin(origins = "https://serene-wave-27221.herokuapp.com", maxAge = 3600)
+@RestController
 public class UserController {
 
     @Autowired
@@ -33,9 +34,10 @@ public class UserController {
 
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)//TODO сделать проверку на id и 404
     @ResponseBody
-    public User getStudent(@PathVariable("id") int id, @RequestBody User user) {
+    public User getStudent(@PathVariable("id") int id, @RequestBody User user, HttpServletResponse response) {
         user.setId(id);
         userService.update(user);
+        response.setHeader("Access-Control-Allow-Headers",  "Content-Type");
         return userService.getAllForId(id);
     }
 
