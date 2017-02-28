@@ -45,7 +45,7 @@ public class FileDownloadController
 
             try
             {
-                Files.copy(file, response.getOutputStream());
+                PdfWriter.getInstance(document, response.getOutputStream());
                 response.getOutputStream().flush();
             }
             catch (IOException ex) {
