@@ -8,6 +8,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,16 +20,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Controller
-@RequestMapping("/reports")
+
 public class FileDownloadController
 {
-    @RequestMapping("/users")
+    @RequestMapping(value = "/reports/users", method = RequestMethod.GET)
     public void downloadPDFResource( HttpServletRequest request,
                                      HttpServletResponse response) throws FileNotFoundException, DocumentException {
         //If user is not authorized - he should be thrown out from here itself
         String fileName = "users.pdf";
         //Authorized user will download the file
-        String dataDirectory = request.getServletContext().getRealPath("/WEB-INF/reports/users/");
+        String dataDirectory = request.getServletContext().getRealPath("/users.pdf");
         Path file = Paths.get(dataDirectory, fileName);
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dataDirectory));
