@@ -17,6 +17,7 @@ public class User {
     private int id;
 
     @Column(name = "LAST_NAME")
+    @Pattern(regexp = "^[A-Za-z][a-z]+$")
     @Size(max = 20, message = "value lastName - exceeds the permissible value")
     private String lastName;
 
