@@ -6,6 +6,7 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.*;
@@ -24,7 +25,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Controller
-@RequestMapping("/download")
 public class FileDownloadController
 {
     @RequestMapping("/pdf/{fileName:.+}")
@@ -39,35 +39,23 @@ public class FileDownloadController
         document.add(new Paragraph("sdgsdgsdg"));
         document.close();
         writer.close();
+        response.setContentType("application/pdf");
+        response.addHeader("Content-Disposition", "attachment; filename="+fileName);
+        PdfWriter.getInstance(document, response.getOutputStream());
+        response.getOutputStream().flush();
 
-        //Authorized user will download the file
-        String dataDirectory = request.getServletContext().getRealPath("/WEB-INF/downloads/pdf/");
-        Path file = Paths.get(dataDirectory, fileName);
-        if (Files.exists(file))
-        {
-            response.setContentType("application/pdf");
-            response.addHeader("Content-Disposition", "attachment; filename="+fileName);
-            PdfWriter.getInstance(document, response.getOutputStream());
-            response.getOutputStream().flush();
-        }
     }
 
-    @RequestMapping(value="/downloadLogFile")
-    public void getLogFile(HttpSession session, HttpServletResponse response) throws Exception {
+    @RequestMapping(value = "/download", method = RequestMethod.GET)
+    public void getFile(HttpServletResponse response) {
         try {
-            String filePathToBeServed = "C:\\ITextTest.pdf";
-            File fileToDownload = new File(filePathToBeServed);
-            InputStream inputStream = new FileInputStream(fileToDownload);
-            response.setContentType("application/force-download");
-            String fileName = "ITextTest" ;
-            response.setHeader("Content-Disposition", "attachment; filename="+fileName+".txt");
-            IOUtils.copy(inputStream, response.getOutputStream());
+            DefaultResourceLoader loader = new DefaultResourceLoader();
+            InputStream is = loader.getResource("classpath:META-INF/resources/Accepted.pdf").getInputStream();
+            IOUtils.copy(is, response.getOutputStream());
+            response.setHeader("Content-Disposition", "attachment; filename=Accepted.pdf");
             response.flushBuffer();
-            inputStream.close();
-        } catch (Exception e){
-
-            e.printStackTrace();
+        } catch (IOException ex) {
+            throw new RuntimeException("IOError writing file to output stream");
         }
-
     }
 }
