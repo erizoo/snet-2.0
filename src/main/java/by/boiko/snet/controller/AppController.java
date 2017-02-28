@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AppController {
 
     @RequestMapping("/")
-    public String hello(Model model){
-        model.addAttribute("hello", "Hello, World!");
+    public String hello(){
+
         return "hello";
     }
 

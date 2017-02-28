@@ -16,7 +16,6 @@ import javax.servlet.ServletContext;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/download")
 public class DownloadFileRestController {
 
     @Autowired
@@ -37,9 +36,8 @@ public class DownloadFileRestController {
         headers.add("Expires", "0");
 
         headers.setContentLength(pdfFile.contentLength());
-        ResponseEntity<InputStreamResource> response = new ResponseEntity<InputStreamResource>(
+        return new ResponseEntity<InputStreamResource>(
                 new InputStreamResource(pdfFile.getInputStream()), headers, HttpStatus.OK);
-        return response;
     }
 
 }
