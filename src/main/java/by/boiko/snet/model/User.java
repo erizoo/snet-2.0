@@ -25,7 +25,7 @@ public class User {
     private int age;
 
     @Column(name = "SEX")
-    private boolean sex; //TODO подумать как реализовать по-другому
+    private String sex; //TODO подумать как реализовать по-другому
 
     @Column(name = "CITY")
     @Size(max = 20, message = "value city - exceeds the permissible value")
@@ -37,17 +37,13 @@ public class User {
     public User() {
     }
 
-    public User(String lastName, String firstName, int age, boolean sex, String city, int income) {
+    public User(String lastName, String firstName, int age, String sex, String city, int income) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.age = age;
         this.sex = sex;
         this.city = city;
         this.income = income;
-    }
-
-    public String getSexString() {
-        return sex ? "Male" : "Female";
     }
 
     public int getId() {
@@ -82,11 +78,11 @@ public class User {
         this.age = age;
     }
 
-    public boolean isSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(boolean sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -102,8 +98,7 @@ public class User {
         return income;
     }
 
-    public void setIncom(int incom) {
-        this.income = incom;
+    public void setIncome(int income) {
+        this.income = income;
     }
-
 }
