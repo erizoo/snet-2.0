@@ -12,10 +12,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 @Controller
-@RequestMapping("/download")
+@RequestMapping("/reports")
 public class FileDownloadController
 {
-    @RequestMapping("/pdf/{fileName:.+}")
+    @RequestMapping("/{fileName:.+}")
     public void downloadPDFResource( HttpServletRequest request,
                                      HttpServletResponse response,
                                      @PathVariable("fileName") String fileName)
