@@ -28,7 +28,7 @@ public class FileDownloadController
         //If user is not authorized - he should be thrown out from here itself
         String fileName = "users.pdf";
         //Authorized user will download the file
-        String dataDirectory = request.getServletContext().getRealPath("/WEB-INF/reports/");
+        String dataDirectory = request.getServletContext().getRealPath("/WEB-INF/reports/users/");
         Path file = Paths.get(dataDirectory, fileName);
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(dataDirectory));
