@@ -27,8 +27,7 @@ public class FileDownloadController
     @RequestMapping("/pdf/{fileName:.+}")
     public void downloadPDFResource( HttpServletRequest request,
                                      HttpServletResponse response,
-                                     @PathVariable("fileName") String fileName,
-                                     @RequestHeader String referer) throws DocumentException, FileNotFoundException {
+                                     @PathVariable("fileName") String fileName) throws DocumentException, FileNotFoundException {
 
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:\\ITextTest.pdf"));
