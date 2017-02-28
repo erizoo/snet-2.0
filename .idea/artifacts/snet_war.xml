@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="snet:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="snet.war">
+      <element id="artifact" artifact-name="snet:war exploded" />
+    </root>
+  </artifact>
+</component>
