@@ -5,6 +5,10 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.commons.io.IOUtils;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -13,9 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -27,7 +30,7 @@ public class FileDownloadController
     @RequestMapping("/pdf/{fileName:.+}")
     public void downloadPDFResource( HttpServletRequest request,
                                      HttpServletResponse response,
-                                     @PathVariable("fileName") String fileName) throws DocumentException, FileNotFoundException {
+                                     @PathVariable("fileName") String fileName) throws DocumentException, IOException {
 
         Document document = new Document(PageSize.A4, 50, 50, 50, 50);
         PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:\\ITextTest.pdf"));
@@ -44,14 +47,27 @@ public class FileDownloadController
         {
             response.setContentType("application/pdf");
             response.addHeader("Content-Disposition", "attachment; filename="+fileName);
-            try
-            {
-                PdfWriter.getInstance(document, response.getOutputStream());
-                response.getOutputStream().flush();
-            }
-            catch (IOException ex) {
-                ex.printStackTrace();
-            }
+            PdfWriter.getInstance(document, response.getOutputStream());
+            response.getOutputStream().flush();
         }
+    }
+
+    @RequestMapping(value="/downloadLogFile")
+    public void getLogFile(HttpSession session, HttpServletResponse response) throws Exception {
+        try {
+            String filePathToBeServed = "C:\\ITextTest.pdf";
+            File fileToDownload = new File(filePathToBeServed);
+            InputStream inputStream = new FileInputStream(fileToDownload);
+            response.setContentType("application/force-download");
+            String fileName = "ITextTest" ;
+            response.setHeader("Content-Disposition", "attachment; filename="+fileName+".txt");
+            IOUtils.copy(inputStream, response.getOutputStream());
+            response.flushBuffer();
+            inputStream.close();
+        } catch (Exception e){
+
+            e.printStackTrace();
+        }
+
     }
 }
