@@ -22,12 +22,11 @@ import java.nio.file.Paths;
 @RequestMapping("/reports")
 public class FileDownloadController
 {
-    @RequestMapping("/{fileName:.+}")
+    @RequestMapping("/users")
     public void downloadPDFResource( HttpServletRequest request,
-                                     HttpServletResponse response,
-                                     @PathVariable("fileName") String fileName) throws FileNotFoundException, DocumentException {
+                                     HttpServletResponse response) throws FileNotFoundException, DocumentException {
         //If user is not authorized - he should be thrown out from here itself
-
+        String fileName = "users.pdf";
         //Authorized user will download the file
         String dataDirectory = request.getServletContext().getRealPath("/WEB-INF/reports/");
         Path file = Paths.get(dataDirectory, fileName);
