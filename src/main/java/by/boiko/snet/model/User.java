@@ -1,8 +1,10 @@
 package by.boiko.snet.model;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "user")
@@ -13,24 +15,36 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty
+    @Pattern(regexp = "^[A-Za-z][a-z]+$")
     @Column(name = "LAST_NAME")
     @Size(max = 20, message = "value lastName - exceeds the permissible value")
     private String lastName;
 
+    @NotEmpty
+    @Pattern(regexp = "^[A-Za-z][a-z]+$")
     @Column(name = "FIRST_NAME")
     @Size(max = 20, message = "value firstName - exceeds the permissible value")
     private String firstName;
 
+    @Digits(integer = 2,fraction = 0)
+    @Min(0)
+    @Max(99)
     @Column(name = "age")
     private int age;
 
+    @NotEmpty
     @Column(name = "SEX")
     private String sex; //TODO подумать как реализовать по-другому
 
+    @NotEmpty
     @Column(name = "CITY")
     @Size(max = 20, message = "value city - exceeds the permissible value")
     private String city;
 
+    @NotNull
+    @Min(0)
+    @Max(999999)
     @Column(name = "INCOME")
     private int income;
 
