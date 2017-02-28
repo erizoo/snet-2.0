@@ -4,6 +4,7 @@ package by.boiko.snet.controller;
 import by.boiko.snet.model.User;
 import by.boiko.snet.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 
 @CrossOrigin(origins = "https://serene-wave-27221.herokuapp.com", maxAge = 3600)
-@RestController
+@Controller
 public class UserController {
 
     @Autowired
