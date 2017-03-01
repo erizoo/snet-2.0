@@ -19,18 +19,22 @@ public class UserServiceImpl implements UserService {
         this.userDao = userDao;
     }
 
+    @Override
     public List<User> getAll() {
         return userDao.loadAll();
     }
 
+    @Override
     public User getAllForId(int id) {
         return userDao.loadAllUsersForId(id);
     }
 
+    @Override
     public void delete(int id) {
         userDao.delete(id);
     }
 
+    @Override
     public void save(User user) {
         userDao.save(user);
     }
@@ -38,5 +42,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) {
         userDao.update(user);
+    }
+
+    @Override
+    public List<User> getNames() {
+        return userDao.loadNames();
     }
 }

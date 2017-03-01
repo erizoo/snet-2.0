@@ -41,4 +41,6 @@ public interface UserService {
     void save(User user);
 
     void update(User user);
+
+    List<User> getNames();
 }

@@ -41,4 +41,6 @@ public interface UserDao {
    User loadAllUsersForId(int id);
 
     void update(User user);
+
+    List loadNames();
 }

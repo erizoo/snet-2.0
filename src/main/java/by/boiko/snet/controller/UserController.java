@@ -40,7 +40,7 @@ public class UserController {
         return userService.getAllForId(id);
     }
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET) //TODO  404
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
     public User getStudent(@PathVariable("id") int id) {
         userService.getAllForId(id);

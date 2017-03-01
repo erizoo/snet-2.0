@@ -4,6 +4,7 @@ package by.boiko.snet.dao.impl;
 import by.boiko.snet.dao.UserDao;
 import by.boiko.snet.model.User;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -52,7 +53,10 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     public void update(User user) {
             sessionFactory.getCurrentSession().merge(user);
-
         }
-
+    @Override
+    @Transactional
+    public List<User> loadNames() {
+        return sessionFactory.getCurrentSession().createQuery("from User").list();
+    }
 }

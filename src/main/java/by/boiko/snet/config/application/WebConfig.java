@@ -3,6 +3,7 @@ package by.boiko.snet.config.application;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -13,11 +14,13 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan({"by.boiko.snet.config", "by.boiko.snet.controller.*", "by.boiko.snet.*", "by.boiko.snet.dao", "by.boiko.snet.service"})
+@PropertySource({"classpath:views.properties"})
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public InternalResourceViewResolver viewResolver() {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
         viewResolver.setViewClass(JstlView.class);
+        viewResolver.setPrefix("2");
         viewResolver.setPrefix("/WEB-INF/views/");
         viewResolver.setSuffix(".jsp");
         viewResolver.setContentType("text/html; charset=utf-8");
@@ -30,13 +33,14 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         registry.addMapping("/**")
                 .allowedOrigins("*")
                 .allowedMethods("PUT", "POST", "DELETE", "GET")
-                .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept", "application/json; charset=utf8");
+                .allowedHeaders("Origin", "X-Requested-With", "Content-Type", "Accept");
 
     }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         String myExternalFilePath = "file:///C:/proj/java/images/avatars/";
+        registry.addResourceHandler("/res/**").addResourceLocations("/src/main/resources/");
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/views/css/");
         registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/views/images/");
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/views/js/");

@@ -45,6 +45,11 @@ public class User {
     public User() {
     }
 
+    public User(String lastName, String firstName) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+    }
+
     public User(String lastName, String firstName, int age, String sex, String city, int income) {
         this.lastName = lastName;
         this.firstName = firstName;
