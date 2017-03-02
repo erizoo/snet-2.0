@@ -18,11 +18,8 @@ import java.util.Map;
  * This view class generates a PDF document 'on the fly' based on the data
  * contained in the model.
  */
-@Controller
-public class PDFBuilder extends AbstractITextPdfView {
 
-    @Autowired
-    private UserService userService;
+public class PDFBuilder extends AbstractITextPdfView {
 
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document doc,
@@ -57,7 +54,6 @@ public class PDFBuilder extends AbstractITextPdfView {
         LocalDate localDate = LocalDate.now();
         String formattedDate = localDate.format(formatter);
         document.addTitle("users_" + formattedDate + ".pdf");
-        
     }
 
 }
