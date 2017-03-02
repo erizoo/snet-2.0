@@ -48,7 +48,7 @@ public class FileDownloadController {
     public
     @ResponseBody
     HttpEntity<byte[]> downloadB(User user) throws IOException, DocumentException {
-        cratedFirstPdf();
+//        cratedFirstPdf();
         File file = getFile();
         byte[] document = FileCopyUtils.copyToByteArray(file);
         HttpHeaders header = new HttpHeaders();
@@ -58,33 +58,33 @@ public class FileDownloadController {
         return new HttpEntity<byte[]>(document, header);
     }
 
-    private void cratedFirstPdf() throws FileNotFoundException, DocumentException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate localDate = LocalDate.now();
-        String formattedDate = localDate.format(formatter);
-        Document doc = new Document();
-        PdfWriter.getInstance(doc, new FileOutputStream("D:\\users" + formattedDate + ".pdf"));
-        doc.open();
-        Font f = new Font(Font.FontFamily.TIMES_ROMAN, 30f, Font.NORMAL, BaseColor.BLACK);
-        Font f2 = new Font(Font.FontFamily.TIMES_ROMAN, 20f, Font.NORMAL, BaseColor.BLACK);
-        Paragraph paragraph = new Paragraph("List of users", f);
-        Paragraph paragraph2 = new Paragraph(String.valueOf(formattedDate), f2);
-        paragraph.setAlignment(Element.ALIGN_CENTER);
-        paragraph2.setAlignment(Element.ALIGN_CENTER);
-        doc.add(paragraph);
-        doc.add(paragraph2);
-        User user = new User();
-        List list1 = new List(List.ORDERED);
-        list1.setFirst(1);
-            for(User row : userService.getNames()){
-                user.setFirstName(row.getFirstName());
-                user.setLastName(row.getLastName());
-                String userSting = row.getFirstName() + " " + row.getLastName();
-                list1.add(userSting);
-            }
-        doc.add(list1);
-        doc.close();
-    }
+//    private void cratedFirstPdf() throws FileNotFoundException, DocumentException {
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+//        LocalDate localDate = LocalDate.now();
+//        String formattedDate = localDate.format(formatter);
+//        Document doc = new Document();
+//        PdfWriter.getInstance(doc, new FileOutputStream("D:\\users" + formattedDate + ".pdf"));
+//        doc.open();
+//        Font f = new Font(Font.FontFamily.TIMES_ROMAN, 30f, Font.NORMAL, BaseColor.BLACK);
+//        Font f2 = new Font(Font.FontFamily.TIMES_ROMAN, 20f, Font.NORMAL, BaseColor.BLACK);
+//        Paragraph paragraph = new Paragraph("List of users", f);
+//        Paragraph paragraph2 = new Paragraph(String.valueOf(formattedDate), f2);
+//        paragraph.setAlignment(Element.ALIGN_CENTER);
+//        paragraph2.setAlignment(Element.ALIGN_CENTER);
+//        doc.add(paragraph);
+//        doc.add(paragraph2);
+//        User user = new User();
+//        List list1 = new List(List.ORDERED);
+//        list1.setFirst(1);
+//            for(User row : userService.getNames()){
+//                user.setFirstName(row.getFirstName());
+//                user.setLastName(row.getLastName());
+//                String userSting = row.getFirstName() + " " + row.getLastName();
+//                list1.add(userSting);
+//            }
+//        doc.add(list1);
+//        doc.close();
+//    }
 
     private File getFile() throws FileNotFoundException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -97,11 +97,19 @@ public class FileDownloadController {
         return file;
     }
 
-    @RequestMapping(value = "/downloadPDF", method = RequestMethod.GET)
-    public ModelAndView downloadExcel() {
+    @RequestMapping(value = "/reports/users", method = RequestMethod.GET)
+    public ModelAndView downloadPdf() {
         // create some sample data
+
+        User user = new User();
         java.util.List<User> listBooks = new ArrayList<User>();
-        listBooks.add(new User("Spring in Action", "Craig Walls"));
+        for(User row : userService.getNames()){
+            user.setFirstName(row.getFirstName());
+            user.setLastName(row.getLastName());
+            String userSting = row.getFirstName() + " " + row.getLastName();
+            listBooks.add(new User(row.getFirstName(), row.getLastName()));
+        }
+
 
         // return a view which will be resolved by an excel view resolver
         return new ModelAndView("pdfView", "listBooks", listBooks);

@@ -1,13 +1,18 @@
 package by.boiko.snet;
 
 import by.boiko.snet.model.User;
+import by.boiko.snet.service.UserService;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +22,11 @@ import java.util.Map;
  * @author www.codejava.net
  *
  */
+@Controller
 public class PDFBuilder extends AbstractITextPdfView {
+
+    @Autowired
+    private UserService userService;
 
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document doc,
@@ -26,44 +35,30 @@ public class PDFBuilder extends AbstractITextPdfView {
         // get data model which is passed by the Spring container
         List<User> listUsers = (List<User>) model.get("listBooks");
 
-        doc.add(new Paragraph("Recommended books for Spring framework"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.now();
+        String formattedDate = localDate.format(formatter);
 
-        PdfPTable table = new PdfPTable(5);
-        table.setWidthPercentage(100.0f);
-        table.setWidths(new float[] {3.0f, 2.0f, 2.0f, 2.0f, 1.0f});
-        table.setSpacingBefore(10);
-
-        // define font for table header row
-        Font font = FontFactory.getFont(FontFactory.HELVETICA);
-        font.setColor(BaseColor.WHITE);
-
-        // define table header cell
-        PdfPCell cell = new PdfPCell();
-        cell.setBackgroundColor(BaseColor.BLUE);
-        cell.setPadding(5);
-
-        // write table header
-        cell.setPhrase(new Phrase("Book Title", font));
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Author", font));
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("ISBN", font));
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Published Date", font));
-        table.addCell(cell);
-
-        cell.setPhrase(new Phrase("Price", font));
-        table.addCell(cell);
-
-        // write table row data
-        for (User aBook : listUsers) {
-            table.addCell(aBook.getFirstName());
-            table.addCell(aBook.getLastName());
+        Font f = new Font(Font.FontFamily.TIMES_ROMAN, 30f, Font.NORMAL, BaseColor.BLACK);
+        Font f2 = new Font(Font.FontFamily.TIMES_ROMAN, 20f, Font.NORMAL, BaseColor.BLACK);
+        Paragraph paragraph = new Paragraph("List of users", f);
+        Paragraph paragraph2 = new Paragraph(String.valueOf(formattedDate), f2);
+        paragraph.setAlignment(Element.ALIGN_CENTER);
+        paragraph2.setAlignment(Element.ALIGN_CENTER);
+        doc.add(paragraph);
+        doc.add(paragraph2);
+        User user = new User();
+        com.itextpdf.text.List list1 = new com.itextpdf.text.List(com.itextpdf.text.List.ORDERED);
+        list1.setFirst(1);
+        for (User row: listUsers){
+            user.setFirstName(row.getFirstName());
+            user.setLastName(row.getLastName());
+            String userSting = row.getFirstName() + " " + row.getLastName();
+            list1.add(userSting);
         }
-        doc.add(table);
+        doc.add(list1);
+
+
 
     }
 
