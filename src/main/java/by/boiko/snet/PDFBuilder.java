@@ -1,15 +1,15 @@
 package by.boiko.snet;
 
 import by.boiko.snet.model.User;
-import by.boiko.snet.service.UserService;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.time.LocalDate;
+
+
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -21,17 +21,17 @@ import java.util.Map;
 
 public class PDFBuilder extends AbstractITextPdfView {
 
+    private org.joda.time.format.DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd-MM-yyyy");
+
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document doc,
                                     PdfWriter writer, HttpServletRequest request, HttpServletResponse response) throws Exception {
         List<User> listUsers = (List<User>) model.get("listBooks");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate localDate = LocalDate.now();
-        String formattedDate = localDate.format(formatter);
+
         Font f = new Font(Font.FontFamily.TIMES_ROMAN, 30f, Font.NORMAL, BaseColor.BLACK);
         Font f2 = new Font(Font.FontFamily.TIMES_ROMAN, 20f, Font.NORMAL, BaseColor.BLACK);
         Paragraph paragraph = new Paragraph("List of users", f);
-        Paragraph paragraph2 = new Paragraph(String.valueOf(formattedDate), f2);
+        Paragraph paragraph2 = new Paragraph(String.valueOf(dateTimeFormatter.print(new LocalDate())), f2);
         paragraph.setAlignment(Element.ALIGN_CENTER);
         paragraph2.setAlignment(Element.ALIGN_CENTER);
         doc.add(paragraph);
@@ -50,10 +50,6 @@ public class PDFBuilder extends AbstractITextPdfView {
 
     @Override
     protected void buildPdfMetadata(Map<String, Object> model, Document document, HttpServletRequest request) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate localDate = LocalDate.now();
-        String formattedDate = localDate.format(formatter);
-        document.addTitle("users_" + formattedDate + ".pdf");
+        document.addTitle("users_" + dateTimeFormatter.print(new LocalDate()) + ".pdf");
     }
-
 }
