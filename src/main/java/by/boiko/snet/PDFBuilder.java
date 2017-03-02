@@ -51,4 +51,13 @@ public class PDFBuilder extends AbstractITextPdfView {
         doc.add(list1);
     }
 
+    @Override
+    protected void buildPdfMetadata(Map<String, Object> model, Document document, HttpServletRequest request) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.now();
+        String formattedDate = localDate.format(formatter);
+        document.addTitle("users_" + formattedDate + ".pdf");
+        
+    }
+
 }

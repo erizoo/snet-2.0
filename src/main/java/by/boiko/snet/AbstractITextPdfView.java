@@ -49,10 +49,7 @@ public abstract class AbstractITextPdfView extends AbstractView {
 
         // Flush to HTTP response.
         writeToResponse(response, baos);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate localDate = LocalDate.now();
-        String formattedDate = localDate.format(formatter);
-        document.addTitle("users_" + formattedDate + ".pdf");
+
     }
 
     protected Document newDocument() {
