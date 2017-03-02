@@ -29,7 +29,7 @@ public class FileDownloadController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/reports/users", method = RequestMethod.GET)
+    @RequestMapping(value = "reports/users", method = RequestMethod.GET)
     public ModelAndView downloadPdf() {
         User user = new User();
         java.util.List<User> listBooks = new ArrayList<User>();
