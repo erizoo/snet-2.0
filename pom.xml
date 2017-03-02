@@ -15,18 +15,12 @@
         <servletapi.version>3.1.0</servletapi.version>
         <jdk.version>1.8</jdk.version>
     </properties>
-    <repositories>
-        <repository>
-            <id>clojars.org</id>
-            <url>http://clojars.org/repo</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
-            <groupId>json-to-pdf</groupId>
-            <artifactId>json-to-pdf</artifactId>
-            <version>0.7.5</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>${spring.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -57,6 +51,18 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
+        </dependency>
+
+        <!-- Spring MVC Mail Related Dependency -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+            <version>1.7</version>
         </dependency>
 
         <!-- hibernate -->
@@ -189,6 +195,7 @@
             <artifactId>joda-time</artifactId>
             <version>2.9.7</version>
         </dependency>
+
     </dependencies>
 
     <build>
