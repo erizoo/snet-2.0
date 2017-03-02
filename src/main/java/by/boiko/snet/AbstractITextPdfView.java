@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
@@ -47,6 +49,10 @@ public abstract class AbstractITextPdfView extends AbstractView {
 
         // Flush to HTTP response.
         writeToResponse(response, baos);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        LocalDate localDate = LocalDate.now();
+        String formattedDate = localDate.format(formatter);
+        document.addTitle("users_" + formattedDate + ".pdf");
     }
 
     protected Document newDocument() {

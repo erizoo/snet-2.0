@@ -26,22 +26,8 @@ import java.util.ArrayList;
 @Controller
 public class FileDownloadController {
 
-    private int size;
-    private static final String APPLICATION_PDF = "application/pdf";
-
     @Autowired
     private UserService userService;
-
-    private File getFile() throws FileNotFoundException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-        LocalDate localDate = LocalDate.now();
-        String formattedDate = localDate.format(formatter);
-        File file = new File("D:\\users" + formattedDate + ".pdf");
-        if (!file.exists()) {
-            throw new FileNotFoundException("file with path: " + "D:\\users" + formattedDate + ".pdf" + " was not found.");
-        }
-        return file;
-    }
 
     @RequestMapping(value = "/reports/users", method = RequestMethod.GET)
     public ModelAndView downloadPdf() {
