@@ -26,6 +26,8 @@ public class PDFBuilder extends AbstractITextPdfView {
     @Override
     protected void buildPdfDocument(Map<String, Object> model, Document doc,
                                     PdfWriter writer, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        response.setHeader("Content-Disposition", "inline; filename=" + "users_" + dateTimeFormatter.print(new LocalDate()) + ".pdf");
         List<User> listUsers = (List<User>) model.get("listBooks");
 
         Font f = new Font(Font.FontFamily.TIMES_ROMAN, 30f, Font.NORMAL, BaseColor.BLACK);
