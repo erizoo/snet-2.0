@@ -33,7 +33,7 @@ public class ApplicationTestConfig {
 
     @Autowired
     private Environment environment;
-    
+
     /**
      * Deploy in local server
      */
