@@ -3,6 +3,7 @@ package by.boiko.snet.service;
 
 import by.boiko.snet.model.User;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -50,4 +51,18 @@ public interface UserService {
 
     List<User> getNames();
 
+    /**
+     * Get list of all users.
+     *
+     * @return list users
+     */
+    List<User> getAll();
+
+    /**
+     * Get creation date a user.
+     *
+     * @param id identifier of a user
+     * @return creation date a user
+     */
+    LocalDateTime getCreatedDate(int id);
 }

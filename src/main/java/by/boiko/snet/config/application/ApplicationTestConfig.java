@@ -72,18 +72,6 @@ public class ApplicationTestConfig {
         return bean;
     }
 
-//    @Bean
-//    public EntityManagerFactory entityManagerFactory() throws SQLException, URISyntaxException {  //TODO убрать
-//        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
-//        factoryBean.setDataSource(dataSource());
-//        factoryBean.setPackagesToScan("by.boiko.snet.model");
-//        HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-//        jpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
-//        factoryBean.setJpaVendorAdapter(jpaVendorAdapter);
-//        factoryBean.afterPropertiesSet();
-//        return factoryBean.getObject();
-//    }
-
     @Bean
     public LocalSessionFactoryBean sessionFactory() throws SQLException, URISyntaxException {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();

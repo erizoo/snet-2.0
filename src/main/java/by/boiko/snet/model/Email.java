@@ -22,7 +22,7 @@ public class Email {
     private String from;
 
     @Column(name = "TIME_EMAIL")
-    private LocalDateTime createdTimestamp;
+    private LocalDateTime createdTimestamp; //TODO подумать на форматом
 
     public Email() {
     }

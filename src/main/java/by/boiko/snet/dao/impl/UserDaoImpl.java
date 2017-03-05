@@ -8,18 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
  * The class implements methods for access to MySQL database for User.
  */
+@SuppressWarnings("unchecked")
 @Service
 public class UserDaoImpl implements UserDao {
 
     @Autowired
     private SessionFactory sessionFactory;
 
-    @SuppressWarnings("unchecked")
     @Transactional
     public List<User> loadAll(int offset, int limit) {
         return sessionFactory.getCurrentSession().createQuery("from User").setFirstResult(offset).setMaxResults(limit).list();
@@ -57,5 +58,17 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     public List<User> loadNames() {
         return sessionFactory.getCurrentSession().createQuery("from User").list();
+    }
+
+    @Override
+    @Transactional
+    public List<User> loadAll() {
+        return sessionFactory.getCurrentSession().createQuery("from User").list();
+    }
+
+    @Override
+    @Transactional
+    public LocalDateTime getCreatedDate(int id) {
+        return (LocalDateTime) sessionFactory.getCurrentSession().createQuery("select u.createdTimestamp from User u where id = :id").setParameter("id", id).uniqueResult();
     }
 }

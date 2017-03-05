@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -30,11 +31,21 @@ public class UserController {
         return userService.getAll(offset,limit);
     }
 
-
+    /**
+     * Update a user for id.
+     *
+     * @param id identifier of a user
+     * @param user model
+     * @return json with find user
+     */
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public User getStudent(@PathVariable("id") int id, @RequestBody User user) {
+
+        LocalDateTime localDateTime = LocalDateTime.now();
+        user.setModifiedTimestamp(localDateTime);
         user.setId(id);
+        user.setCreatedTimestamp(userService.getCreatedDate(id));
         userService.update(user);
         return userService.getAllForId(id);
     }
@@ -80,6 +91,8 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.POST)
     @ResponseBody
     public List<User> saveUser(@RequestBody User user) {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        user.setCreatedTimestamp(localDateTime);
         userService.save(user);
         return userService.getAll();
     }

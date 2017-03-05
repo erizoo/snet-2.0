@@ -3,6 +3,7 @@ package by.boiko.snet.dao;
 
 import by.boiko.snet.model.User;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -45,4 +46,18 @@ public interface UserDao {
 
     List loadNames();
 
+    /**
+     * Loads list of all users from storage.
+     *
+     * @return list users
+     */
+    List<User> loadAll();
+
+    /**
+     * Load creation date a user.
+     *
+     * @param id identifier of a user
+     * @return creation date a user
+     */
+    LocalDateTime getCreatedDate(int id);
 }

@@ -6,6 +6,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user")
@@ -31,7 +32,7 @@ public class User {
     private int age;
 
     @Column(name = "SEX")
-    private String sex; //TODO подумать как реализовать по-другому
+    private String sex;
 
     @Column(name = "CITY")
     @Size(max = 20, message = "value city - exceeds the permissible value")
@@ -42,6 +43,12 @@ public class User {
     @Column(name = "INCOME")
     private int income;
 
+    @Column(name = "TIME_CREATE_USER")
+    private LocalDateTime createdTimestamp;
+
+    @Column(name = "TIME_UPDATE_USER")
+    private LocalDateTime modifiedTimestamp;
+
     public User() {
     }
 
@@ -50,13 +57,15 @@ public class User {
         this.firstName = firstName;
     }
 
-    public User(String lastName, String firstName, int age, String sex, String city, int income) {
+    public User(String lastName, String firstName, int age, String sex, String city, int income, LocalDateTime createdTimestamp, LocalDateTime modifiedTimestamp) {
         this.lastName = lastName;
         this.firstName = firstName;
         this.age = age;
         this.sex = sex;
         this.city = city;
         this.income = income;
+        this.createdTimestamp = createdTimestamp;
+        this.modifiedTimestamp = modifiedTimestamp;
     }
 
     public int getId() {
@@ -114,4 +123,38 @@ public class User {
     public void setIncome(int income) {
         this.income = income;
     }
+
+    public LocalDateTime getCreatedTimestamp() {
+        return createdTimestamp;
+    }
+
+    public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+        this.createdTimestamp = createdTimestamp;
+    }
+
+    public LocalDateTime getModifiedTimestamp() {
+        return modifiedTimestamp;
+    }
+
+    public void setModifiedTimestamp(LocalDateTime modifiedTimestamp) {
+        this.modifiedTimestamp = modifiedTimestamp;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", age=" + age +
+                ", sex='" + sex + '\'' +
+                ", city='" + city + '\'' +
+                ", income=" + income +
+                ", createdTimestamp=" + createdTimestamp +
+                ", modifiedTimestamp=" + modifiedTimestamp +
+                '}';
+    }
+
+
+
 }
