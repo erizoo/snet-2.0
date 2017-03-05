@@ -1,8 +1,8 @@
 package by.boiko.snet;
 
 import by.boiko.snet.model.Email;
-import by.boiko.snet.model.User;
 import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
@@ -29,22 +29,17 @@ public class PDFBuilderEmailsFeedback extends AbstractITextPdfView {
 
         Font f = new Font(Font.FontFamily.TIMES_ROMAN, 30f, Font.NORMAL, BaseColor.BLACK);
         Font f2 = new Font(Font.FontFamily.TIMES_ROMAN, 20f, Font.NORMAL, BaseColor.BLACK);
-        Paragraph paragraph = new Paragraph("List of users", f);
+        Paragraph paragraph = new Paragraph("List of feedback", f);
         Paragraph paragraph2 = new Paragraph(String.valueOf(dateTimeFormatter.print(new LocalDate())), f2);
         paragraph.setAlignment(Element.ALIGN_CENTER);
         paragraph2.setAlignment(Element.ALIGN_CENTER);
         doc.add(paragraph);
         doc.add(paragraph2);
-        User user = new User();
-        com.itextpdf.text.List list1 = new com.itextpdf.text.List(com.itextpdf.text.List.ORDERED);
-        list1.setFirst(1);
-//        for (Email row : listEmails) {
-//            user.setFirstName(row.getFirstName());
-//            user.setLastName(row.getLastName());
-//            String userSting = row.getFirstName() + " " + row.getLastName();
-//            list1.add(userSting);
-//        }
-        doc.add(list1);
+        PdfPTable table = new PdfPTable(8);
+        for(int aw = 0; aw < 16; aw++){
+            table.addCell("hi");
+        }
+        doc.add(table);
     }
 
     @Override
