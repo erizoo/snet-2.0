@@ -7,6 +7,8 @@ import by.boiko.snet.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmailServiceImpl implements EmailService {
 
@@ -16,5 +18,10 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public void saveEmails(Email email) {
         emailDao.save(email);
+    }
+
+    @Override
+    public List<Email> getAll() {
+        return emailDao.loadAll();
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * The class implements methods for access to MySQL database for Email.
  */
@@ -20,6 +22,13 @@ public class EmailDaoImpl implements EmailDao {
     @Override
     @Transactional
     public void save(Email email) {
-        sessionFactory.getCurrentSession().save(email);
+        sessionFactory.getCurrentSession().saveOrUpdate(email);
+    }
+
+    @Override
+    @Transactional
+    @SuppressWarnings("unchecked")
+    public List<Email> loadAll() {
+        return sessionFactory.getCurrentSession().createQuery("from Email").list();
     }
 }

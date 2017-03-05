@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return userDao.loadAll();
+    public List<User> getAll(int offset, int limit) {
+        return userDao.loadAll(offset, limit);
     }
 
     @Override

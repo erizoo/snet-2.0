@@ -1,8 +1,6 @@
 package by.boiko.snet.service;
 
 import by.boiko.snet.model.Email;
-import by.boiko.snet.model.User;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -17,5 +15,12 @@ public interface EmailService {
      *
      */
     void saveEmails(Email email);
+
+    /**
+     * Loads list of all emails.
+     *
+     * @return list of emails
+     */
+    List<Email> getAll();
 
 }

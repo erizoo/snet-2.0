@@ -13,9 +13,11 @@ public interface UserDao {
     /**
      * Loads list of all users from storage.
      *
-     * @return list of users
+     * @param offset the displacement of the first record
+     * @param limit the maximum number of entries
+     * @return list all users
      */
-    List<User> loadAll();
+    List<User> loadAll(int offset, int limit);
 
     /**
      * Deletes a user from a storage by id.
@@ -42,4 +44,5 @@ public interface UserDao {
     void update(User user);
 
     List loadNames();
+
 }

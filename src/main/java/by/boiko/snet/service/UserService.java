@@ -11,11 +11,13 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * Loads list of all users.
+     * Loads list of all users with params.
      *
-     * @return list of users
+     * @param offset the displacement of the first record
+     * @param limit the maximum number of entries
+     * @return list users
      */
-    List<User> getAll();
+    List<User> getAll(int offset, int limit);
 
     /**
      * Loads a user by id.
@@ -39,7 +41,13 @@ public interface UserService {
      */
     void save(User user);
 
+    /**
+     * Update a user.
+     *
+     * @param user user object to update
+     */
     void update(User user);
 
     List<User> getNames();
+
 }

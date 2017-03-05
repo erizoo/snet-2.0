@@ -21,8 +21,8 @@ public class UserDaoImpl implements UserDao {
 
     @SuppressWarnings("unchecked")
     @Transactional
-    public List<User> loadAll() {
-        return sessionFactory.getCurrentSession().createQuery("from User").list();
+    public List<User> loadAll(int offset, int limit) {
+        return sessionFactory.getCurrentSession().createQuery("from User").setFirstResult(offset).setMaxResults(limit).list();
     }
 
     @Override

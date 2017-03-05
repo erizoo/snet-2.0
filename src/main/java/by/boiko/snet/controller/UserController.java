@@ -26,12 +26,12 @@ public class UserController {
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> getAllUsers() {
-        return userService.getAll();
+    public List<User> getAllUsers(@RequestParam("offset") int offset, @RequestParam("limit") int limit) {
+        return userService.getAll(offset,limit);
     }
 
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)//TODO сделать проверку на id и 404
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public User getStudent(@PathVariable("id") int id, @RequestBody User user) {
         user.setId(id);
@@ -39,6 +39,12 @@ public class UserController {
         return userService.getAllForId(id);
     }
 
+    /**
+     * Get a user for id.
+     *
+     * @param id identifier of a user
+     * @return json with one user
+     */
     @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
     @ResponseBody
     public User getStudent(@PathVariable("id") int id) {
@@ -55,7 +61,7 @@ public class UserController {
      * @param userId identifier of a user to delete
      * @return refresh the page
      */
-    @RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)//TODO  404
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE)
     @ResponseBody
     public List<User> deleteUser(@PathVariable("userId") int userId) {
         userService.getAllForId(userId);
@@ -71,7 +77,7 @@ public class UserController {
      *
      * @return to page with all users
      */
-    @RequestMapping(value = "/users", method = RequestMethod.POST)//TODO сделать проверку на id и 404
+    @RequestMapping(value = "/users", method = RequestMethod.POST)
     @ResponseBody
     public List<User> saveUser(@RequestBody User user) {
         userService.save(user);

@@ -1,39 +1,37 @@
 package by.boiko.snet.model;
 
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "email")
+@Table(name = "mail")
 public class Email {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
-    @Column(name = "SUBJECT")
+    @Column(name = "SUBJECT_EMAIL")
     private String subject;
 
-    @Column(name = "BODY")
+    @Column(name = "BODY_EMAIL")
     private String body;
 
-    @Column(name = "FROM")
+    @Column(name = "FROM_EMAIL")
     private String from;
 
-//    @Column(name = "TIME")
-//    private LocalDateTime time;
+    @Column(name = "TIME_EMAIL")
+    private LocalDateTime createdTimestamp;
 
     public Email() {
     }
 
-
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -59,5 +57,13 @@ public class Email {
 
     public void setFrom(String from) {
         this.from = from;
+    }
+
+    public LocalDateTime getCreatedTimestamp() {
+        return createdTimestamp;
+    }
+
+    public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
+        this.createdTimestamp = createdTimestamp;
     }
 }
