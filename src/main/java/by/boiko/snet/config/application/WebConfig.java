@@ -13,7 +13,7 @@ import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({"by.boiko.snet.config", "by.boiko.snet.controller.*", "by.boiko.snet.*", "by.boiko.snet.dao", "by.boiko.snet.service"})
+@ComponentScan({"by.boiko.snet.config", "by.boiko.snet.controller.*", "by.boiko.snet.*", "by.boiko.snet.dao", "by.boiko.snet.service", "by.boiko.snet.email"})
 @PropertySource({"classpath:views.properties"})
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
