@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * The interface determines the methods for work with User.
  */
-
 public interface UserService {
 
     /**

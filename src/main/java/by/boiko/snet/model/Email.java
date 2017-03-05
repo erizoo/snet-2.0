@@ -1,19 +1,40 @@
 package by.boiko.snet.model;
 
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "email")
 public class Email {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "SUBJECT")
     private String subject;
+
+    @Column(name = "BODY")
     private String body;
+
+    @Column(name = "FROM")
     private String from;
+
+//    @Column(name = "TIME")
+//    private LocalDateTime time;
 
     public Email() {
     }
 
-    public Email(String subject, String body, String from) {
-        this.subject = subject;
-        this.body = body;
-        this.from = from;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getSubject() {
@@ -38,14 +59,5 @@ public class Email {
 
     public void setFrom(String from) {
         this.from = from;
-    }
-
-    @Override
-    public String toString() {
-        return "Email{" +
-                "subject='" + subject + '\'' +
-                ", body='" + body + '\'' +
-                ", from='" + from + '\'' +
-                '}';
     }
 }

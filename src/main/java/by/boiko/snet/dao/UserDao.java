@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * The interface determines the basic methods of access to the database.
  */
-
 public interface UserDao {
 
     /**
@@ -38,7 +37,7 @@ public interface UserDao {
      * @param id identifier of a user
      * @return a user
      */
-   User loadAllUsersForId(int id);
+    User loadAllUsersForId(int id);
 
     void update(User user);
 

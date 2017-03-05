@@ -4,7 +4,6 @@ package by.boiko.snet.dao.impl;
 import by.boiko.snet.dao.UserDao;
 import by.boiko.snet.model.User;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +13,6 @@ import java.util.List;
 /**
  * The class implements methods for access to MySQL database for User.
  */
-
 @Service
 public class UserDaoImpl implements UserDao {
 
@@ -52,8 +50,9 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public void update(User user) {
-            sessionFactory.getCurrentSession().merge(user);
-        }
+        sessionFactory.getCurrentSession().merge(user);
+    }
+
     @Override
     @Transactional
     public List<User> loadNames() {
