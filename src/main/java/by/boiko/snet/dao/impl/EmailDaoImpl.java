@@ -31,4 +31,10 @@ public class EmailDaoImpl implements EmailDao {
     public List<Email> loadAll() {
         return sessionFactory.getCurrentSession().createQuery("from Email").list();
     }
+
+    @Override
+    @Transactional
+    public List<Email> loadNames() {
+        return null;
+    }
 }

@@ -23,4 +23,11 @@ public interface EmailDao {
      * @return list of emails
      */
     List<Email> loadAll();
+
+    /**
+     * Load list of all emails for pdf.
+     *
+     * @return list of emails
+     */
+    List<Email> loadNames();
 }

@@ -17,10 +17,16 @@ public interface EmailService {
     void saveEmails(Email email);
 
     /**
-     * Loads list of all emails.
+     * Get list of all emails.
      *
      * @return list of emails
      */
     List<Email> getAll();
 
+    /**
+     * Get list of all emails for pdf.
+     *
+     * @return list of emails
+     */
+    List<Email> getNames();
 }

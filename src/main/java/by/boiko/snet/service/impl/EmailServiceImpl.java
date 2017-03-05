@@ -24,4 +24,9 @@ public class EmailServiceImpl implements EmailService {
     public List<Email> getAll() {
         return emailDao.loadAll();
     }
+
+    @Override
+    public List<Email> getNames() {
+        return emailDao.loadNames();
+    }
 }
