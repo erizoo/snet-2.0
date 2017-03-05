@@ -56,8 +56,8 @@ public interface UserDao {
     /**
      * Load creation date a user.
      *
-     * @param id identifier of a user
-     * @return creation date a user
+     * @param id
+     * @return
      */
     LocalDateTime getCreatedDate(int id);
 }

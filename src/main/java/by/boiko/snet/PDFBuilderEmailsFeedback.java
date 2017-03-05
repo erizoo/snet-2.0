@@ -35,7 +35,9 @@ public class PDFBuilderEmailsFeedback extends AbstractITextPdfView {
         paragraph2.setAlignment(Element.ALIGN_CENTER);
         doc.add(paragraph);
         doc.add(paragraph2);
-        PdfPTable table = new PdfPTable(8);
+        paragraph = new Paragraph(" ");
+        doc.add(paragraph);
+        PdfPTable table = new PdfPTable(5);
         for(int aw = 0; aw < 16; aw++){
             table.addCell("hi");
         }

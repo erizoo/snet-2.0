@@ -66,6 +66,7 @@ public class UserDaoImpl implements UserDao {
         return sessionFactory.getCurrentSession().createQuery("from User").list();
     }
 
+
     @Override
     @Transactional
     public LocalDateTime getCreatedDate(int id) {
