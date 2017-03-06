@@ -28,12 +28,15 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
     public List<User> getAllUsers(@RequestParam(value = "offset", required=false) Integer offset, @RequestParam(value = "limit", required=false) Integer limit) {
-        if (offset == null && limit == null){
+        if (offset != null && limit == null ){
+            return userService.getAllWithOffset(offset);
+        }if (limit != null && offset == null ) {
+            return userService.getAllWithLimit(limit);
+        }if (offset == null && limit == null ){
             return userService.getAll();
         }else {
             return userService.getAll(offset,limit);
         }
-
     }
 
     /**

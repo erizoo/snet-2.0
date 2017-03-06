@@ -60,4 +60,20 @@ public interface UserDao {
      * @return
      */
     LocalDateTime getCreatedDate(int id);
+
+    /**
+     * Load a recording with parameter limit.
+     *
+     * @param offset params for search emails
+     * @return list users
+     */
+    List<User> loadAllWithOffset(Integer offset);
+
+    /**
+     * Load a recording with parameter limit.
+     *
+     * @param limit params for search emails
+     * @return list users
+     */
+    List<User> loadAllWithLimit(Integer limit);
 }

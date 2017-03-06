@@ -72,4 +72,14 @@ public class UserDaoImpl implements UserDao {
     public LocalDateTime getCreatedDate(int id) {
         return (LocalDateTime) sessionFactory.getCurrentSession().createQuery("select u.createdTimestamp from User u where id = :id").setParameter("id", id).uniqueResult();
     }
+
+    @Override
+    public List<User> loadAllWithOffset(Integer offset) {
+        return sessionFactory.getCurrentSession().createQuery("from User").setFirstResult(offset).list();
+    }
+
+    @Override
+    public List<User> loadAllWithLimit(Integer limit) {
+        return sessionFactory.getCurrentSession().createQuery("from User").setMaxResults(limit).list();
+    }
 }

@@ -65,4 +65,20 @@ public interface UserService {
      * @return creation date a user
      */
     LocalDateTime getCreatedDate(int id);
+
+    /**
+     * Get a recording with parameter offset.
+     *
+     * @param offset params for search emails
+     * @return list users
+     */
+    List<User> getAllWithOffset(Integer offset);
+
+    /**
+     * Get a recording with parameter limit.
+     *
+     * @param limit params for search emails
+     * @return list users
+     */
+    List<User> getAllWithLimit(Integer limit);
 }

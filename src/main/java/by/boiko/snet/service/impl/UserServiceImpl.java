@@ -59,4 +59,14 @@ public class UserServiceImpl implements UserService {
     public LocalDateTime getCreatedDate(int id) {
        return userDao.getCreatedDate(id);
     }
+
+    @Override
+    public List<User> getAllWithOffset(Integer offset) {
+        return userDao.loadAllWithOffset(offset);
+    }
+
+    @Override
+    public List<User> getAllWithLimit(Integer limit) {
+        return userDao.loadAllWithLimit(limit);
+    }
 }
