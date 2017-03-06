@@ -22,7 +22,7 @@ import java.util.Map;
 public abstract class AbstractITextPdfView extends AbstractView {
 
     public AbstractITextPdfView() {
-        setContentType("application/pdf");
+        setContentType("application/pdf; charset=UTF-8");
     }
 
     @Override
@@ -46,6 +46,7 @@ public abstract class AbstractITextPdfView extends AbstractView {
         document.open();
         buildPdfDocument(model, document, writer, request, response);
         document.close();
+        response.setContentType("application/pdf; charset=UTF-8");
 
         // Flush to HTTP response.
         writeToResponse(response, baos);

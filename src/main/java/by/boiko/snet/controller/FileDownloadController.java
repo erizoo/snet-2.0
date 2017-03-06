@@ -44,6 +44,7 @@ public class FileDownloadController {
             email.setFrom(row.getFrom());
             email.setSubject(row.getSubject());
             email.setCreatedTimestamp(row.getCreatedTimestamp());
+            listEmails.add(new Email(row.getBody(), row.getFrom(), row.getSubject(), row.getCreatedTimestamp()));
         }
             return new ModelAndView("pdfViewEmails", "listEmails", listEmails);
     }

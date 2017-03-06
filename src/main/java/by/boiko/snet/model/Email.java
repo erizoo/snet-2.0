@@ -27,6 +27,13 @@ public class Email {
     public Email() {
     }
 
+    public Email(String subject, String body, String from, LocalDateTime createdTimestamp) {
+        this.subject = subject;
+        this.body = body;
+        this.from = from;
+        this.createdTimestamp = createdTimestamp;
+    }
+
     public int getId() {
         return id;
     }
