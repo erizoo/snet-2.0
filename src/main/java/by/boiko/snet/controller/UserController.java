@@ -27,22 +27,40 @@ public class UserController {
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> getAllUsers(@RequestParam(value = "offset", required=false) Integer offset, @RequestParam(value = "limit", required=false) Integer limit) {
-        if (offset != null && limit == null ){
-            return userService.getAllWithOffset(offset);
-        }if (limit != null && offset == null ) {
-            return userService.getAllWithLimit(limit);
-        }if (offset == null && limit == null ){
-            return userService.getAll();
-        }else {
-            return userService.getAll(offset,limit);
+    public List<User> getAllUsers(@RequestParam(value = "offset", required = false) Integer offset,
+                                  @RequestParam(value = "limit", required = false) Integer limit,
+                                  @RequestParam(value = "inc", required = false) String inc,
+                                  @RequestParam(value = "exc", required = false) String exc) {
+        StringBuilder builder = new StringBuilder() ;
+        String us = "u.";
+        for (String constraint : inc.split(",")) {
+            builder.append(us);
+            builder.append(constraint += ",");
         }
+
+        System.out.println(builder);
+        String s = builder.substring(0, builder.length()-1);
+        System.out.println(s);
+        if (inc.equals("")){
+            if (offset != null && limit == null) {
+                return userService.getAllWithOffset(offset);
+            }
+            if (limit != null && offset == null) {
+                return userService.getAllWithLimit(limit);
+            }
+            if (offset == null && limit == null) {
+                return userService.getAll();
+            } else {
+                return userService.getAll(offset, limit);
+            }
+        }
+        return userService.getAllWithInc(s);
     }
 
     /**
      * Update a user for id.
      *
-     * @param id identifier of a user
+     * @param id   identifier of a user
      * @param user model
      * @return json with find user
      */
@@ -68,10 +86,10 @@ public class UserController {
     @ResponseBody
     public User getStudent(@PathVariable("id") int id) {
         userService.getAllForId(id);
-        if (userService.getAllForId(id) == null){
+        if (userService.getAllForId(id) == null) {
             throw new RuntimeException("User with id does not exist");
         } else
-        return userService.getAllForId(id);
+            return userService.getAllForId(id);
     }
 
     /**
@@ -84,10 +102,10 @@ public class UserController {
     @ResponseBody
     public List<User> deleteUser(@PathVariable("userId") int userId) {
         userService.getAllForId(userId);
-        if (userService.getAllForId(userId) == null){
+        if (userService.getAllForId(userId) == null) {
             throw new RuntimeException("User with id does not exist");
         } else
-        userService.delete(userId);
+            userService.delete(userId);
         return userService.getAll();
     }
 

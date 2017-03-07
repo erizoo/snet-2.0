@@ -81,4 +81,6 @@ public interface UserService {
      * @return list users
      */
     List<User> getAllWithLimit(Integer limit);
+
+    List<User> getAllWithInc(String s);
 }

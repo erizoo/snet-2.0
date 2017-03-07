@@ -69,4 +69,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getAllWithLimit(Integer limit) {
         return userDao.loadAllWithLimit(limit);
     }
+
+    @Override
+    public List<User> getAllWithInc(String s) {
+        return userDao.loadAllWithInc(s);
+    }
 }

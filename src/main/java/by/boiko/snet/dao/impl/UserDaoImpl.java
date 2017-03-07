@@ -63,7 +63,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public List<User> loadAll() {
-        return sessionFactory.getCurrentSession().createQuery("from User").list();
+        return sessionFactory.getCurrentSession().createQuery("select u.id, u.lastName, u.firstName, u.age, u.sex, u.city, u.income from User u").list();
     }
 
 
@@ -83,5 +83,11 @@ public class UserDaoImpl implements UserDao {
     @Transactional
     public List<User> loadAllWithLimit(Integer limit) {
         return sessionFactory.getCurrentSession().createQuery("from User").setMaxResults(limit).list();
+    }
+
+    @Override
+    @Transactional
+    public List<User> loadAllWithInc(String s) {
+        return sessionFactory.getCurrentSession().createQuery("select " + s + " from User u").list();
     }
 }

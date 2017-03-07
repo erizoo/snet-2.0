@@ -76,4 +76,7 @@ public interface UserDao {
      * @return list users
      */
     List<User> loadAllWithLimit(Integer limit);
+
+
+    List<User> loadAllWithInc(String s);
 }
