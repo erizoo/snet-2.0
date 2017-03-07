@@ -1,6 +1,7 @@
 package by.boiko.snet.service.impl;
 
 
+import by.boiko.snet.StringSplit;
 import by.boiko.snet.dao.UserDao;
 import by.boiko.snet.model.User;
 import by.boiko.snet.service.UserService;
@@ -57,21 +58,43 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public LocalDateTime getCreatedDate(int id) {
-       return userDao.getCreatedDate(id);
+        return userDao.getCreatedDate(id);
     }
 
     @Override
-    public List<User> getAllWithOffset(Integer offset) {
-        return userDao.loadAllWithOffset(offset);
-    }
-
-    @Override
-    public List<User> getAllWithLimit(Integer limit) {
-        return userDao.loadAllWithLimit(limit);
-    }
-
-    @Override
-    public List<User> getAllWithInc(String s) {
-        return userDao.loadAllWithInc(s);
+    public List<User> getAllWithParams(Integer offset, Integer limit, String exc, String inc, StringSplit stringSplit) {
+        if (offset != null && limit == null && exc == null && inc == null) {
+            return userDao.loadAllWithOffset(offset);
+        }
+        if (offset == null && limit != null && exc == null && inc == null) {
+            return userDao.loadAllWithOffset(limit);
+        }
+        if (offset == null && limit == null && exc != null && inc == null) {
+            StringBuilder builder = new StringBuilder();
+            StringBuilder builder1 = new StringBuilder();
+            String us = "u.";
+            String str = stringSplit.stringSplit(exc);
+            String b = str.replaceAll(" ", "");
+            ;
+            builder1.append(b);
+            String s = builder1.substring(1, builder1.length() - 1);
+            for (String constraint : s.split(",")) {
+                builder.append(us);
+                builder.append(constraint += ", ");
+            }
+            String s3 = builder.substring(0, builder.length() - 2);
+            return userDao.loadAllWithExc(s3);
+        }
+        if (offset == null && limit == null && exc == null && inc != null) {
+            StringBuilder builder = new StringBuilder();
+            String us = "u.";
+            for (String constraint : inc.split(",")) {
+                builder.append(us);
+                builder.append(constraint += ",");
+            }
+            String s = builder.substring(0, builder.length() - 1);
+            return userDao.loadAllWithInc(s);
+        }
+        return userDao.loadAll();
     }
 }

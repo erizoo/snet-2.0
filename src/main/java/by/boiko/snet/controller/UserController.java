@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * The controller determines methods for access to User service.
@@ -30,41 +29,11 @@ public class UserController {
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> getAllUsers(@RequestParam(value = "exc", required = false) String exc, StringSplit stringSplit) {
-        StringBuilder builder = new StringBuilder() ;
-        StringBuilder builder1 = new StringBuilder() ;
-        String us = "u.";
-        String str = stringSplit.stringSplit(exc);
-        String b = str.replaceAll(" ", "");
-        System.out.println(b);
-        builder1.append(b);
-        String s = builder1.substring(1, builder1.length()-1);
-
-        for (String constraint : s.split(",")) {
-            builder.append(us);
-            builder.append(constraint += ", ");
-        }
-        String s3 = builder.substring(0, builder.length()-1);
-        System.out.println(s3);
-
-
-//        System.out.println(builder);
-//        String s = builder.substring(0, builder.length()-1);
-//        System.out.println(s);
-//        if (inc.equals("")){
-//            if (offset != null && limit == null) {
-//                return userService.getAllWithOffset(offset);
-//            }
-//            if (limit != null && offset == null) {
-//                return userService.getAllWithLimit(limit);
-//            }
-//            if (offset == null && limit == null) {
-//                return userService.getAll();
-//            } else {
-//                return userService.getAll(offset, limit);
-//            }
-//        }
-        return userService.getAll();
+    public List<User> getAllUsers(@RequestParam(value = "offset", required = false) Integer offset,
+                                  @RequestParam(value = "limit", required = false) Integer limit,
+                                  @RequestParam(value = "inc", required = false) String inc,
+                                  @RequestParam(value = "exc", required = false) String exc, StringSplit stringSplit) {
+        return userService.getAllWithParams(offset, limit, exc, inc, stringSplit);
     }
 
     /**

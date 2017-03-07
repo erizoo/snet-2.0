@@ -90,4 +90,10 @@ public class UserDaoImpl implements UserDao {
     public List<User> loadAllWithInc(String s) {
         return sessionFactory.getCurrentSession().createQuery("select " + s + " from User u").list();
     }
+
+    @Override
+    @Transactional
+    public List<User> loadAllWithExc(String exc) {
+        return sessionFactory.getCurrentSession().createQuery("select " + exc + " from User u").list();
+    }
 }

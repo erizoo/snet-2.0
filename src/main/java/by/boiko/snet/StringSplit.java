@@ -8,7 +8,7 @@ import java.util.List;
 public class StringSplit {
 
     public String stringSplit(String s2){
-        String s1 = "name, lastName, age, sex";
+        String s1 = "firstName, lastName, age, sex, city, income";
         String[] ar1 = null, ar2 = null;
         ar1 = fillArray(s1);
         ar2 = fillArray(s2);

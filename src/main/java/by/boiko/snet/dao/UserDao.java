@@ -42,8 +42,18 @@ public interface UserDao {
      */
     User loadAllUsersForId(int id);
 
+    /**
+     * Update a user in a storage.
+     *
+     * @param user model user
+     */
     void update(User user);
 
+    /**
+     * Loads a users from a storage by name.
+     *
+     * @return list users
+     */
     List loadNames();
 
     /**
@@ -56,15 +66,15 @@ public interface UserDao {
     /**
      * Load creation date a user.
      *
-     * @param id
-     * @return
+     * @param id identifier of a user
+     * @return creation date a user
      */
     LocalDateTime getCreatedDate(int id);
 
     /**
      * Load a recording with parameter limit.
      *
-     * @param offset params for search emails
+     * @param offset params for search users
      * @return list users
      */
     List<User> loadAllWithOffset(Integer offset);
@@ -72,11 +82,24 @@ public interface UserDao {
     /**
      * Load a recording with parameter limit.
      *
-     * @param limit params for search emails
+     * @param limit params for search users
      * @return list users
      */
     List<User> loadAllWithLimit(Integer limit);
 
+    /**
+     * Load a recording with parameter inc.
+     *
+     * @param inc param
+     * @return list users
+     */
+    List<User> loadAllWithInc(String inc);
 
-    List<User> loadAllWithInc(String s);
+    /**
+     * Load a recording with parameter exc.
+     *
+     * @param exc param
+     * @return list users
+     */
+    List<User> loadAllWithExc(String exc);
 }

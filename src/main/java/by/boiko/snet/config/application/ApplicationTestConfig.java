@@ -1,7 +1,6 @@
 package by.boiko.snet.config.application;
 
 import by.boiko.snet.model.User;
-import com.mysql.jdbc.Driver;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +9,12 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.ResourceBundleViewResolver;
 
-import javax.sql.DataSource;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
@@ -32,38 +29,38 @@ public class ApplicationTestConfig {
     @Autowired
     private Environment environment;
 
-    /**
-     * Deploy in local server
-     */
-    @Bean
-    public DataSource dataSource() throws SQLException {
-        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-        dataSource.setDriver(new Driver());
-        dataSource.setUrl("jdbc:mysql://localhost:3306/test?characterEncoding=utf8");
-        dataSource.setUsername("root");
-        dataSource.setPassword("4123");
-        return dataSource;
-    }
-
 //    /**
-//     * @return deploy heroku
-//     * @throws URISyntaxException
+//     * Deploy in local server
 //     */
 //    @Bean
-//    public BasicDataSource dataSource() throws URISyntaxException {
-//        URI dbUri = new URI(System.getenv("JAWSDB_URL"));
-//
-//        String username = dbUri.getUserInfo().split(":")[0];
-//        String password = dbUri.getUserInfo().split(":")[1];
-//        String dbUrl = "jdbc:mysql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-//
-//        BasicDataSource basicDataSource = new BasicDataSource();
-//        basicDataSource.setUrl(dbUrl);
-//        basicDataSource.setUsername(username);
-//        basicDataSource.setPassword(password);
-//
-//        return basicDataSource;
+//    public DataSource dataSource() throws SQLException {
+//        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+//        dataSource.setDriver(new Driver());
+//        dataSource.setUrl("jdbc:mysql://localhost:3306/test?characterEncoding=utf8");
+//        dataSource.setUsername("root");
+//        dataSource.setPassword("");
+//        return dataSource;
 //    }
+
+    /**
+     * @return deploy heroku
+     * @throws URISyntaxException
+     */
+    @Bean
+    public BasicDataSource dataSource() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("JAWSDB_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:mysql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+
+        BasicDataSource basicDataSource = new BasicDataSource();
+        basicDataSource.setUrl(dbUrl);
+        basicDataSource.setUsername(username);
+        basicDataSource.setPassword(password);
+
+        return basicDataSource;
+    }
 
 
     @Bean

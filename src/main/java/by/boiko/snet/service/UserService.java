@@ -1,6 +1,7 @@
 package by.boiko.snet.service;
 
 
+import by.boiko.snet.StringSplit;
 import by.boiko.snet.model.User;
 
 import java.time.LocalDateTime;
@@ -67,20 +68,14 @@ public interface UserService {
     LocalDateTime getCreatedDate(int id);
 
     /**
-     * Get a recording with parameter offset.
+     * Get a recording with params.
      *
-     * @param offset params for search emails
+     * @param offset params
+     * @param limit params
+     * @param exc params
+     * @param inc params
+     * @param stringSplit params
      * @return list users
      */
-    List<User> getAllWithOffset(Integer offset);
-
-    /**
-     * Get a recording with parameter limit.
-     *
-     * @param limit params for search emails
-     * @return list users
-     */
-    List<User> getAllWithLimit(Integer limit);
-
-    List<User> getAllWithInc(String s);
+    List<User> getAllWithParams(Integer offset, Integer limit, String exc, String inc, StringSplit stringSplit);
 }
