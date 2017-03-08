@@ -23,7 +23,7 @@ public class UserDaoImpl implements UserDao {
 
     @Transactional
     public List<User> loadAll(int offset, int limit) {
-        return sessionFactory.getCurrentSession().createQuery("from User").setFirstResult(offset).setMaxResults(limit).list();
+        return sessionFactory.getCurrentSession().createQuery("select u.id, u.lastName, u.firstName, u.age, u.sex, u.city, u.income from User u").setFirstResult(offset).setMaxResults(limit).list();
     }
 
     @Override
@@ -76,13 +76,13 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public List<User> loadAllWithOffset(Integer offset) {
-        return sessionFactory.getCurrentSession().createQuery("from User").setFirstResult(offset).list();
+        return sessionFactory.getCurrentSession().createQuery("select u.id, u.lastName, u.firstName, u.age, u.sex, u.city, u.income from User u").setFirstResult(offset).list();
     }
 
     @Override
     @Transactional
     public List<User> loadAllWithLimit(Integer limit) {
-        return sessionFactory.getCurrentSession().createQuery("from User").setMaxResults(limit).list();
+        return sessionFactory.getCurrentSession().createQuery("select u.id, u.lastName, u.firstName, u.age, u.sex, u.city, u.income from User u").setMaxResults(limit).list();
     }
 
     @Override

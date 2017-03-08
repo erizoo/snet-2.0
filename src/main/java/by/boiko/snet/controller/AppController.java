@@ -10,7 +10,7 @@ public class AppController {
     @RequestMapping("/")
     public String hello(){
 
-        return "hello";
+        return "twitter";
     }
 
     @RequestMapping("/error")

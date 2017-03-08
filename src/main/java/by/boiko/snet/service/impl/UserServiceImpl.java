@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
             return userDao.loadAllWithOffset(offset);
         }
         if (offset == null && limit != null && exc == null && inc == null) {
-            return userDao.loadAllWithOffset(limit);
+            return userDao.loadAllWithLimit(limit);
         }
         if (offset == null && limit == null && exc != null && inc == null) {
             StringBuilder builder = new StringBuilder();
@@ -94,6 +94,8 @@ public class UserServiceImpl implements UserService {
             }
             String s = builder.substring(0, builder.length() - 1);
             return userDao.loadAllWithInc(s);
+        }if (offset != null && limit != null && exc == null && inc == null) {
+          return userDao.loadAll(offset, limit);
         }
         return userDao.loadAll();
     }
