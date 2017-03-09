@@ -2,6 +2,7 @@ package by.boiko.snet.dao;
 
 
 import by.boiko.snet.model.User;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -61,6 +62,7 @@ public interface UserDao {
      *
      * @return list users
      */
+    @ResponseBody
     List<User> loadAll();
 
     /**
@@ -69,6 +71,7 @@ public interface UserDao {
      * @param id identifier of a user
      * @return creation date a user
      */
+    @ResponseBody
     LocalDateTime getCreatedDate(int id);
 
     /**
@@ -77,6 +80,7 @@ public interface UserDao {
      * @param offset params for search users
      * @return list users
      */
+    @ResponseBody
     List<User> loadAllWithOffset(Integer offset);
 
     /**
@@ -85,6 +89,7 @@ public interface UserDao {
      * @param limit params for search users
      * @return list users
      */
+    @ResponseBody
     List<User> loadAllWithLimit(Integer limit);
 
     /**
@@ -93,6 +98,7 @@ public interface UserDao {
      * @param inc param
      * @return list users
      */
+    @ResponseBody
     List<User> loadAllWithInc(String inc);
 
     /**
@@ -101,5 +107,6 @@ public interface UserDao {
      * @param exc param
      * @return list users
      */
+    @ResponseBody
     List<User> loadAllWithExc(String exc);
 }
