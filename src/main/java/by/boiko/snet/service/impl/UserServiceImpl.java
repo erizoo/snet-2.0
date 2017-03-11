@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.monitorjbl.json.Match.match;
@@ -84,9 +85,7 @@ public class UserServiceImpl implements UserService {
         if (offset == null && limit == null && exc != null && inc == null) {
             String[] str = stringSplit.stringSplit(exc);
             List<String> result = new ArrayList();
-            for (String str1 : str) {
-                result.add(str1);
-            }
+            Collections.addAll(result, str);
             String[] strings = result.stream().toArray(String[]::new);
             System.out.println(Arrays.toString(strings));
             ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
@@ -98,9 +97,7 @@ public class UserServiceImpl implements UserService {
         if (offset == null && limit == null && exc == null && inc != null) {
             String[] str = stringSplit.stringSplit(inc);
             List<String> result = new ArrayList();
-            for (String str1 : str) {
-                result.add(str1);
-            }
+            Collections.addAll(result, str);
             String[] strings = result.stream().toArray(String[]::new);
             ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
             return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithInc())
