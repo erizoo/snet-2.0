@@ -2,6 +2,7 @@ package by.boiko.snet.controller;
 
 
 import by.boiko.snet.StringSplit;
+import by.boiko.snet.exception.ResourceNotFoundExceptionForGetUserId;
 import by.boiko.snet.model.User;
 import by.boiko.snet.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,8 +19,6 @@ import java.util.List;
 
 @Controller
 public class UserController {
-
-
 
 
     @Autowired
@@ -50,7 +49,6 @@ public class UserController {
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
     @ResponseBody
     public User getStudent(@PathVariable("id") int id, @RequestBody User user) {
-
         LocalDateTime localDateTime = LocalDateTime.now();
         user.setModifiedTimestamp(localDateTime);
         user.setId(id);
@@ -70,7 +68,7 @@ public class UserController {
     public User getStudent(@PathVariable("id") int id) {
         userService.getAllForId(id);
         if (userService.getAllForId(id) == null) {
-            throw new RuntimeException("User with id does not exist");
+            throw new ResourceNotFoundExceptionForGetUserId();
         } else {
             return userService.getAllForId(id);
         }
@@ -88,7 +86,7 @@ public class UserController {
     public List<User> deleteUser(@PathVariable("userId") int userId) {
         userService.getAllForId(userId);
         if (userService.getAllForId(userId) == null) {
-            throw new RuntimeException("User with id does not exist");
+            throw new ResourceNotFoundExceptionForGetUserId();
         } else
             userService.delete(userId);
         return userService.getAll();

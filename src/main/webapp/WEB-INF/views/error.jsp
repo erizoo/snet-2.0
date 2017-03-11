@@ -5,6 +5,6 @@
     <title>Title</title>
 </head>
 <body>
-${error}
+sdgsdgdsg
 </body>
 </html>
