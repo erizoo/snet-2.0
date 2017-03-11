@@ -23,8 +23,8 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.6.RELEASE" />
           <element id="library" level="project" name="Maven: javax.mail:mail:1.4.7" />
-          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
           <element id="library" level="project" name="Maven: com.sun.mail:smtp:1.4.5" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1.1" />
           <element id="library" level="project" name="Maven: org.hibernate:hibernate-core:5.2.5.Final" />
           <element id="library" level="project" name="Maven: org.jboss.logging:jboss-logging:3.3.0.Final" />
           <element id="library" level="project" name="Maven: org.javassist:javassist:3.20.0-GA" />
@@ -69,10 +69,12 @@
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.5" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-simple:1.6.4" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.6" />
-          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.5" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.6" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.0" />
           <element id="library" level="project" name="Maven: org.mortbay.jetty:jetty-util:6.1.25" />
           <element id="library" level="project" name="Maven: joda-time:joda-time:2.9.7" />
+          <element id="library" level="project" name="Maven: org.jetbrains:annotations:15.0" />
+          <element id="library" level="project" name="Maven: com.monitorjbl:json-view:0.15" />
         </element>
       </element>
       <element id="directory" name="META-INF">
