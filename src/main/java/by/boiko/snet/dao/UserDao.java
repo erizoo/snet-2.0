@@ -90,16 +90,14 @@ public interface UserDao {
     /**
      * Load a recording with parameter inc.
      *
-     * @param inc param
      * @return list users
      */
-    List<User> loadAllWithInc(String inc);
+    List<User> loadAllWithInc();
 
     /**
      * Load a recording with parameter exc.
      *
-     * @param exc param
      * @return list users
      */
-    List<User> loadAllWithExc(String exc);
+    List<User> loadAllWithExc();
 }

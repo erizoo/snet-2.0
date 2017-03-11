@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,7 +26,7 @@ public class UserDaoImpl implements UserDao {
 
     @Transactional
     public List<User> loadAll(int offset, int limit) {
-        return sessionFactory.getCurrentSession().createQuery("select u.id, u.lastName, u.firstName, u.age, u.sex, u.city, u.income from User u").setFirstResult(offset).setMaxResults(limit).list();
+        return sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset).setMaxResults(limit).list();
     }
 
     @Override
@@ -63,7 +66,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public List<User> loadAll() {
-        return sessionFactory.getCurrentSession().createQuery("select u.id, u.lastName, u.firstName, u.age, u.sex, u.city, u.income from User u").list();
+        return sessionFactory.getCurrentSession().createQuery("from User").list();
     }
 
 
@@ -76,24 +79,24 @@ public class UserDaoImpl implements UserDao {
     @Override
     @Transactional
     public List<User> loadAllWithOffset(Integer offset) {
-        return sessionFactory.getCurrentSession().createQuery("select u.id, u.lastName, u.firstName, u.age, u.sex, u.city, u.income from User u").setFirstResult(offset).list();
+        return sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset).list();
     }
 
     @Override
     @Transactional
     public List<User> loadAllWithLimit(Integer limit) {
-        return sessionFactory.getCurrentSession().createQuery("select u.id, u.lastName, u.firstName, u.age, u.sex, u.city, u.income from User u").setMaxResults(limit).list();
+        return sessionFactory.getCurrentSession().createQuery("from User u").setMaxResults(limit).list();
     }
 
     @Override
     @Transactional
-    public List<User> loadAllWithInc(String s) {
-        return sessionFactory.getCurrentSession().createQuery("select " + s + " from User u").list();
+    public List<User> loadAllWithInc() {
+        return sessionFactory.getCurrentSession().createQuery("from User u").list();
     }
 
     @Override
     @Transactional
-    public List<User> loadAllWithExc(String exc) {
-        return sessionFactory.getCurrentSession().createQuery("select " + exc + " from User u").list();
+    public List<User> loadAllWithExc() {
+        return sessionFactory.getCurrentSession().createQuery("from User u").list();
     }
 }

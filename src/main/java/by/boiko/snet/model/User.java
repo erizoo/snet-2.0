@@ -1,6 +1,4 @@
 package by.boiko.snet.model;
-
-
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -55,6 +53,15 @@ public class User {
     public User(String lastName, String firstName) {
         this.lastName = lastName;
         this.firstName = firstName;
+    }
+
+    public User(String lastName, String firstName, int age, String sex, String city, int income) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.age = age;
+        this.sex = sex;
+        this.city = city;
+        this.income = income;
     }
 
     public User(String lastName, String firstName, int age, String sex, String city, int income, LocalDateTime createdTimestamp, LocalDateTime modifiedTimestamp) {

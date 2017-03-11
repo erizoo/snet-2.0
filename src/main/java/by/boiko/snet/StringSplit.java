@@ -2,18 +2,17 @@ package by.boiko.snet;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class StringSplit {
 
-    public String stringSplit(String s2){
-        String s1 = "firstName, lastName, age, sex, city, income";
+    public String[] stringSplit(String s2){
+        String s1 = "id, firstName, lastName, age, sex, city, income, createdTimestamp, modifiedTimestamp";
         String[] ar1 = null, ar2 = null;
         ar1 = fillArray(s1);
         ar2 = fillArray(s2);
         String[] result = diffArray(ar1, ar2);
-        return Arrays.toString(result);
+        return result;
     }
 
     private static String[] fillArray(String str) {
@@ -23,6 +22,7 @@ public class StringSplit {
         }
         return ar;
     }
+
 
     private static String[] diffArray(String[] ar1, String[] ar2) {
         List<String> result = new ArrayList();
@@ -38,7 +38,6 @@ public class StringSplit {
             }
         }
         String s = String.valueOf(result);
-        System.out.println(s);
         return result.toArray(new String[result.size()]);
     }
 

@@ -4,6 +4,7 @@ package by.boiko.snet.controller;
 import by.boiko.snet.StringSplit;
 import by.boiko.snet.model.User;
 import by.boiko.snet.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,8 @@ import java.util.List;
 public class UserController {
 
 
+
+
     @Autowired
     private UserService userService;
 
@@ -29,10 +32,11 @@ public class UserController {
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
-    public List<User> getAllUsers(@RequestParam(value = "offset", required = false) Integer offset,
-                                  @RequestParam(value = "limit", required = false) Integer limit,
-                                  @RequestParam(value = "inc", required = false) String inc,
-                                  @RequestParam(value = "exc", required = false) String exc, StringSplit stringSplit) {
+    public String getAllUsers(@RequestParam(value = "offset", required = false) Integer offset,
+                              @RequestParam(value = "limit", required = false) final Integer limit,
+                              @RequestParam(value = "inc", required = false) String inc,
+                              @RequestParam(value = "exc", required = false) String exc, StringSplit stringSplit) throws JsonProcessingException {
+
         return userService.getAllWithParams(offset, limit, exc, inc, stringSplit);
     }
 
@@ -67,8 +71,10 @@ public class UserController {
         userService.getAllForId(id);
         if (userService.getAllForId(id) == null) {
             throw new RuntimeException("User with id does not exist");
-        } else
+        } else {
             return userService.getAllForId(id);
+        }
+
     }
 
     /**

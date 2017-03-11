@@ -3,6 +3,7 @@ package by.boiko.snet.service;
 
 import by.boiko.snet.StringSplit;
 import by.boiko.snet.model.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -77,5 +78,5 @@ public interface UserService {
      * @param stringSplit params
      * @return list users
      */
-    List<User> getAllWithParams(Integer offset, Integer limit, String exc, String inc, StringSplit stringSplit);
+    String getAllWithParams(Integer offset, Integer limit, String exc, String inc, StringSplit stringSplit) throws JsonProcessingException;
 }

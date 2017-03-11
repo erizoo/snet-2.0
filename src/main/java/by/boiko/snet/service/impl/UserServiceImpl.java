@@ -5,11 +5,19 @@ import by.boiko.snet.StringSplit;
 import by.boiko.snet.dao.UserDao;
 import by.boiko.snet.model.User;
 import by.boiko.snet.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.monitorjbl.json.JsonView;
+import com.monitorjbl.json.JsonViewModule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static com.monitorjbl.json.Match.match;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -62,41 +70,49 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllWithParams(Integer offset, Integer limit, String exc, String inc, StringSplit stringSplit) {
+    public String getAllWithParams(Integer offset, Integer limit, String exc, String inc, StringSplit stringSplit) throws JsonProcessingException {
         if (offset != null && limit == null && exc == null && inc == null) {
-            return userDao.loadAllWithOffset(offset);
+            ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
+            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithOffset(offset))
+                    .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
         }
         if (offset == null && limit != null && exc == null && inc == null) {
-            return userDao.loadAllWithLimit(limit);
+            ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
+            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithLimit(limit))
+                    .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
         }
         if (offset == null && limit == null && exc != null && inc == null) {
-            StringBuilder builder = new StringBuilder();
-            StringBuilder builder1 = new StringBuilder();
-            String us = "u.";
-            String str = stringSplit.stringSplit(exc);
-            String b = str.replaceAll(" ", "");
-            ;
-            builder1.append(b);
-            String s = builder1.substring(1, builder1.length() - 1);
-            for (String constraint : s.split(",")) {
-                builder.append(us);
-                builder.append(constraint += ", ");
+            String[] str = stringSplit.stringSplit(exc);
+            List<String> result = new ArrayList();
+            for (String str1 : str) {
+                result.add(str1);
             }
-            String s3 = builder.substring(0, builder.length() - 2);
-            return userDao.loadAllWithExc(s3);
+            String[] strings = result.stream().toArray(String[]::new);
+            System.out.println(Arrays.toString(strings));
+            ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
+            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithExc())
+                    .onClass(User.class, match()
+                            .exclude("*")
+                            .include(strings)));
         }
         if (offset == null && limit == null && exc == null && inc != null) {
-            StringBuilder builder = new StringBuilder();
-            String us = "u.";
-            for (String constraint : inc.split(",")) {
-                builder.append(us);
-                builder.append(constraint += ",");
+            String[] str = stringSplit.stringSplit(inc);
+            List<String> result = new ArrayList();
+            for (String str1 : str) {
+                result.add(str1);
             }
-            String s = builder.substring(0, builder.length() - 1);
-            return userDao.loadAllWithInc(s);
+            String[] strings = result.stream().toArray(String[]::new);
+            ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
+            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithInc())
+                    .onClass(User.class, match()
+                            .exclude(strings)));
         }if (offset != null && limit != null && exc == null && inc == null) {
-          return userDao.loadAll(offset, limit);
+            ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
+            return mapper.writeValueAsString(JsonView.with(userDao.loadAll(offset, limit))
+                    .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
         }
-        return userDao.loadAll();
+        ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
+        return mapper.writeValueAsString(JsonView.with(userDao.loadAll())
+                .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
     }
 }
