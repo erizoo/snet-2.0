@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.monitorjbl.json.Match.match;
@@ -84,7 +83,6 @@ public class UserServiceImpl implements UserService {
         ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
         if (exc != null && inc == null) {
             String[] str = stringSplit.stringSplit(exc);
-            System.out.println(Arrays.toString(str));
             return mapper.writeValueAsString(JsonView.with(userList)
                     .onClass(User.class, match()
                             .exclude("*")
