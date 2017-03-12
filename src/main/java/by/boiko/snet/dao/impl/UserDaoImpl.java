@@ -29,10 +29,7 @@ public class UserDaoImpl implements UserDao {
         }
         if (limit != null && limit > 0) {
             query.setMaxResults(limit);
-        } if (limit != null && offset != null){
-            query.setFirstResult(offset).setMaxResults(limit);
         }
-        
         return query.list();
     }
 
