@@ -77,5 +77,5 @@ public interface UserService {
      * @param stringSplit params
      * @return list users
      */
-    String getAllWithParams(Integer offset, Integer limit, String exc, String inc, StringSplit stringSplit) throws JsonProcessingException;
+    String getAllWithParams(int offset, int limit, String exc, String inc, StringSplit stringSplit) throws JsonProcessingException;
 }

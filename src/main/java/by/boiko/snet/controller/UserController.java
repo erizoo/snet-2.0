@@ -32,7 +32,7 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
     public String getAllUsers(@RequestParam(value = "offset", required = false) int offset,
-                              @RequestParam(value = "limit", required = false) final int limit,
+                              @RequestParam(value = "limit", required = false) int limit,
                               @RequestParam(value = "inc", required = false) String inc,
                               @RequestParam(value = "exc", required = false) String exc, StringSplit stringSplit) throws JsonProcessingException {
 
