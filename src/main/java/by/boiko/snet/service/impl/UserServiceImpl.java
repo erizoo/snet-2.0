@@ -60,6 +60,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getNames() {
+        return userDao.loadNames();
+    }
+
+    @Override
     @Transactional
     public List<User> getAll() {
         return userDao.loadAll();

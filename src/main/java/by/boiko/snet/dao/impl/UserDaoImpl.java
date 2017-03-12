@@ -4,14 +4,10 @@ package by.boiko.snet.dao.impl;
 import by.boiko.snet.dao.UserDao;
 import by.boiko.snet.model.User;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -27,15 +23,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> loadAllWithOffsetAndLimit(int offset, int limit) {
-        Query query;
-        if (offset == 0 && limit != 0){
-            query = (Query) sessionFactory.getCurrentSession().createQuery("from User u").setMaxResults(limit);
-        } if (offset != 0 && limit == 0){
-            query = (Query) sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset);
-        }else {
-            query = (Query) sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset).setMaxResults(limit);
+        Query query = sessionFactory.getCurrentSession().createQuery("from User u");
+        if (offset != 0) {
+            query = query.setFirstResult(offset);
         }
-        return query.getResultList();
+        if (limit != 0) {
+            query = query.setMaxResults(limit);
+        }else {
+            query = query.setFirstResult(offset).setMaxResults(limit);
+        }
+        return query.list();
     }
 
     @Override
@@ -60,6 +57,11 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void update(User user) {
         sessionFactory.getCurrentSession().merge(user);
+    }
+
+    @Override
+    public List<User> loadNames() {
+        return sessionFactory.getCurrentSession().createQuery("select firstName , lastName from User").list();
     }
 
     @Override

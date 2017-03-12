@@ -65,4 +65,5 @@ public interface UserDao {
     LocalDateTime getCreatedDate(int id);
 
 
+    List<User> loadNames();
 }

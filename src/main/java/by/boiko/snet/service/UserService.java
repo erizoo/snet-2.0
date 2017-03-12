@@ -58,6 +58,7 @@ public interface UserService {
      */
     List<User> getAll();
 
+    List<User> getNames();
     /**
      * Get creation date a user.
      *
