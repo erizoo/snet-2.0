@@ -94,12 +94,6 @@ public class UserServiceImpl implements UserService {
                             .exclude("*")
                             .include(str)));
         }
-        if (exc == null && inc != null) {
-            String[] str = stringSplit.stringSplit(inc);
-            return mapper.writeValueAsString(JsonView.with(userList)
-                    .onClass(User.class, match()
-                            .exclude(str)));
-        }
         return mapper.writeValueAsString(JsonView.with(userList)
                 .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
     }
