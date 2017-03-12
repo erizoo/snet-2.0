@@ -18,7 +18,7 @@ public interface UserDao {
      * @param limit the maximum number of entries
      * @return list all users
      */
-    List<User> loadAll(int offset, int limit);
+    List<User> loadAllWithOffsetAndLimit(int offset, int limit);
 
     /**
      * Deletes a user from a storage by id.
@@ -48,7 +48,7 @@ public interface UserDao {
      * @param user model user
      */
     void update(User user);
-    
+
     /**
      * Loads list of all users from storage.
      *
@@ -64,20 +64,5 @@ public interface UserDao {
      */
     LocalDateTime getCreatedDate(int id);
 
-    /**
-     * Load a recording with parameter limit.
-     *
-     * @param offset params for search users
-     * @return list users
-     */
-    List<User> loadAllWithOffset(Integer offset);
-
-    /**
-     * Load a recording with parameter limit.
-     *
-     * @param limit params for search users
-     * @return list users
-     */
-    List<User> loadAllWithLimit(Integer limit);
 
 }

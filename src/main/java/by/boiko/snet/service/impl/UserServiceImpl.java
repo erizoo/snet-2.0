@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<User> getAll(int offset, int limit) {
-        return userDao.loadAll(offset, limit);
+        return userDao.loadAllWithOffsetAndLimit(offset, limit);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
     public String getAllWithParams(Integer offset, Integer limit, String exc, String inc, StringSplit stringSplit) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
         if (offset != null && limit == null && exc == null && inc == null) {
-            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithOffset(offset))
+            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithOffsetAndLimit(offset))
                     .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
         }
         if (offset == null && limit != null && exc == null && inc == null) {
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
                     .onClass(User.class, match()
                             .exclude(str)));
         }if (offset != null && limit != null && exc == null && inc == null) {
-            return mapper.writeValueAsString(JsonView.with(userDao.loadAll(offset, limit))
+            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithOffsetAndLimit(offset, limit))
                     .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
         }
         return mapper.writeValueAsString(JsonView.with(userDao.loadAll())

@@ -25,8 +25,14 @@ public class UserDaoImpl implements UserDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<User> loadAll(int offset, int limit) {
-        return sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset).setMaxResults(limit).list();
+    public List<User> loadAllWithOffsetAndLimit(int offset, int limit) {
+        if (offset == 0 && limit != 0){
+            return sessionFactory.getCurrentSession().createQuery("from User u").setMaxResults(limit).list();
+        } if (offset != 0 && limit == 0){
+            return sessionFactory.getCurrentSession().createQuery("from User u").setMaxResults(offset).list();
+        }else {
+            return sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset).setMaxResults(limit).list();
+        }
     }
 
     @Override
@@ -60,21 +66,7 @@ public class UserDaoImpl implements UserDao {
 
 
     @Override
-    @Transactional
     public LocalDateTime getCreatedDate(int id) {
         return (LocalDateTime) sessionFactory.getCurrentSession().createQuery("select u.createdTimestamp from User u where id = :id").setParameter("id", id).uniqueResult();
     }
-
-    @Override
-    @Transactional
-    public List<User> loadAllWithOffset(Integer offset) {
-        return sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset).list();
-    }
-
-    @Override
-    @Transactional
-    public List<User> loadAllWithLimit(Integer limit) {
-        return sessionFactory.getCurrentSession().createQuery("from User u").setMaxResults(limit).list();
-    }
-
 }
