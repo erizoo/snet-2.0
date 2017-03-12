@@ -51,8 +51,6 @@ public interface UserService {
      */
     void update(User user);
 
-    List<User> getNames();
-
     /**
      * Get list of all users.
      *

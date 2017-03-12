@@ -48,14 +48,7 @@ public interface UserDao {
      * @param user model user
      */
     void update(User user);
-
-    /**
-     * Loads a users from a storage by name.
-     *
-     * @return list users
-     */
-    List loadNames();
-
+    
     /**
      * Loads list of all users from storage.
      *
@@ -87,17 +80,4 @@ public interface UserDao {
      */
     List<User> loadAllWithLimit(Integer limit);
 
-    /**
-     * Load a recording with parameter inc.
-     *
-     * @return list users
-     */
-    List<User> loadAllWithInc();
-
-    /**
-     * Load a recording with parameter exc.
-     *
-     * @return list users
-     */
-    List<User> loadAllWithExc();
 }

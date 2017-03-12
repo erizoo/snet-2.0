@@ -24,13 +24,12 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    @Transactional
+    @Override
     public List<User> loadAll(int offset, int limit) {
         return sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset).setMaxResults(limit).list();
     }
 
     @Override
-    @Transactional
     public void delete(int id) {
         User user = sessionFactory.getCurrentSession().load(
                 User.class, id);
@@ -40,31 +39,21 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    @Transactional
     public void save(User user) {
         sessionFactory.getCurrentSession().saveOrUpdate(user);
     }
 
     @Override
-    @Transactional
     public User loadAllUsersForId(int id) {
         return (User) sessionFactory.getCurrentSession().createQuery("from User u where id = :id").setParameter("id", id).uniqueResult();
     }
 
     @Override
-    @Transactional
     public void update(User user) {
         sessionFactory.getCurrentSession().merge(user);
     }
 
     @Override
-    @Transactional
-    public List<User> loadNames() {
-        return sessionFactory.getCurrentSession().createQuery("from User").list();
-    }
-
-    @Override
-    @Transactional
     public List<User> loadAll() {
         return sessionFactory.getCurrentSession().createQuery("from User").list();
     }
@@ -88,15 +77,4 @@ public class UserDaoImpl implements UserDao {
         return sessionFactory.getCurrentSession().createQuery("from User u").setMaxResults(limit).list();
     }
 
-    @Override
-    @Transactional
-    public List<User> loadAllWithInc() {
-        return sessionFactory.getCurrentSession().createQuery("from User u").list();
-    }
-
-    @Override
-    @Transactional
-    public List<User> loadAllWithExc() {
-        return sessionFactory.getCurrentSession().createQuery("from User u").list();
-    }
 }
