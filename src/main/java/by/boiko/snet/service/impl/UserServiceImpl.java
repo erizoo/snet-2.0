@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public String getAllWithParams(int offset, int limit, String exc, String inc, StringSplit stringSplit) throws JsonProcessingException {
+    public String getAllWithParams(int offset, int limit, String exc, String inc) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
         if (offset != 0 && limit == 0 && exc == null && inc == null) {
             return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithOffsetAndLimit(offset, limit))
