@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,13 +27,15 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public List<User> loadAllWithOffsetAndLimit(int offset, int limit) {
+        Query query;
         if (offset == 0 && limit != 0){
-            return sessionFactory.getCurrentSession().createQuery("from User u").setMaxResults(limit).list();
+            query = (Query) sessionFactory.getCurrentSession().createQuery("from User u").setMaxResults(limit);
         } if (offset != 0 && limit == 0){
-            return sessionFactory.getCurrentSession().createQuery("from User u").setMaxResults(offset).list();
+            query = (Query) sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset);
         }else {
-            return sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset).setMaxResults(limit).list();
+            query = (Query) sessionFactory.getCurrentSession().createQuery("from User u").setFirstResult(offset).setMaxResults(limit);
         }
+        return query.getResultList();
     }
 
     @Override

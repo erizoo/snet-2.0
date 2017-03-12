@@ -76,11 +76,11 @@ public class UserServiceImpl implements UserService {
     public String getAllWithParams(Integer offset, Integer limit, String exc, String inc, StringSplit stringSplit) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
         if (offset != null && limit == null && exc == null && inc == null) {
-            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithOffsetAndLimit(offset))
+            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithOffsetAndLimit(offset, limit))
                     .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
         }
         if (offset == null && limit != null && exc == null && inc == null) {
-            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithLimit(limit))
+            return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithOffsetAndLimit(offset, limit))
                     .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
         }
         if (offset == null && limit == null && exc != null && inc == null) {
