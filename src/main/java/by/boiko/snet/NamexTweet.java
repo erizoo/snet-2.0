@@ -1,50 +1,32 @@
-//package by.boiko.snet;
-//
-//
-//import twitter4j.*;
-//import twitter4j.auth.AccessToken;
-//
-//import java.io.IOException;
-//
-//
-//public class NamexTweet {
-//
-//    private final static String CONSUMER_KEY = "DXjHgk9BHPmekJ2r7OnDg";
-//    private final static String CONSUMER_KEY_SECRET = "u36Xuak99M9tf9Jfms8syFjf1k2LLH9XKJTrAbftE0";
-//
-//    public static void main(String[] args) throws Exception {
-//        new NamexTweet().start();
-//
-//    }
-//
-//    public void start() throws TwitterException, IOException {
-//
-//        Twitter twitter = new TwitterFactory().getInstance();
-//        twitter.setOAuthConsumer(CONSUMER_KEY, CONSUMER_KEY_SECRET);
-//        String accessToken = getSavedAccessToken();
-//        String accessTokenSecret = getSavedAccessTokenSecret();
-//        AccessToken oathAccessToken = new AccessToken(accessToken, accessTokenSecret);
-//        twitter.setOAuthAccessToken(oathAccessToken);
-//        twitter.updateStatus("Hi, im updating status again from Namex Tweet for Demo");
-//        System.out.println("\nMy Timeline:");
-//
-//        ResponseList list = twitter.getHomeTimeline();
-//
-//        for (Status each : list) {
-//
-//            System.out.println("Sent by: @" + each.getUser().getScreenName()
-//                    + " - " + each.getUser().getName() + "\n" + each.getText() + "\n");
-//        }
-//    }
-//
-//    private String getSavedAccessTokenSecret() {
-//        return "oC8tImRFL6i8TuRkTEaIcWsF8oY4SL5iTGNkG9O0Q";
-//
-//    }
-//
-//    private String getSavedAccessToken() {
-//        return "102333999-M4W1Jtp8y8QY8RH7OxGWbM5Len5xOeeTUuG7QfcY";
-//    }
-//
-//}
-//
+package by.boiko.snet;
+
+
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
+
+
+public class NamexTweet {
+
+    private final static String CONSUMER_KEY = "PT6uezLMteHqTsq2VO3qio3cT";
+    private final static String CONSUMER_KEY_SECRET = "6TbfhDYTprrYUh5RIuL9Mml4hcbDQk9sVOWxpkZsS3SNWWkJnb";
+    private final static String ACCESS_TOKEN = "2482477239-pmGBbS1CwltUJhcNuOvXDpRTB1zUvpHzvJ7Aaga";
+    private final static String ACCESS_TOKEN_SECRET = "2482477239-pmGBbS1CwltUJhcNuOvXDpRTB1zUvpHzvJ7Aaga";
+
+    public static void main(String[] args) throws TwitterException {
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+                .setOAuthConsumerKey(CONSUMER_KEY)
+                .setOAuthConsumerSecret(CONSUMER_KEY_SECRET)
+                .setOAuthAccessToken(ACCESS_TOKEN)
+                .setOAuthAccessTokenSecret(ACCESS_TOKEN_SECRET);
+        Twitter twitter = TwitterFactory.getSingleton();
+        String message="\"A Visit to Transylvania\" by Euromaxx: Lifestyle Europe (DW) \n http://bit.ly/1cHB7MH";
+        Status status = twitter.updateStatus(message);
+
+    }
+
+}
+

@@ -13,9 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static com.monitorjbl.json.Match.match;
@@ -84,25 +82,19 @@ public class UserServiceImpl implements UserService {
         }
         if (offset == null && limit == null && exc != null && inc == null) {
             String[] str = stringSplit.stringSplit(exc);
-            List<String> result = new ArrayList();
-            Collections.addAll(result, str);
-            String[] strings = result.stream().toArray(String[]::new);
-            System.out.println(Arrays.toString(strings));
+            System.out.println(Arrays.toString(str));
             ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
             return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithExc())
                     .onClass(User.class, match()
                             .exclude("*")
-                            .include(strings)));
+                            .include(str)));
         }
         if (offset == null && limit == null && exc == null && inc != null) {
             String[] str = stringSplit.stringSplit(inc);
-            List<String> result = new ArrayList();
-            Collections.addAll(result, str);
-            String[] strings = result.stream().toArray(String[]::new);
             ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
             return mapper.writeValueAsString(JsonView.with(userDao.loadAllWithInc())
                     .onClass(User.class, match()
-                            .exclude(strings)));
+                            .exclude(str)));
         }if (offset != null && limit != null && exc == null && inc == null) {
             ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
             return mapper.writeValueAsString(JsonView.with(userDao.loadAll(offset, limit))
