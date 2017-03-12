@@ -82,10 +82,6 @@ public class UserServiceImpl implements UserService {
         StringSplit stringSplit = new StringSplit();
         List<User> userList = userDao.loadAllWithOffsetAndLimit(offset, limit);
         ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
-        if (exc == null && inc == null) {
-            return mapper.writeValueAsString(JsonView.with(userList)
-                    .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
-        }
         if (exc != null && inc == null) {
             String[] str = stringSplit.stringSplit(exc);
             System.out.println(Arrays.toString(str));
@@ -93,6 +89,12 @@ public class UserServiceImpl implements UserService {
                     .onClass(User.class, match()
                             .exclude("*")
                             .include(str)));
+        }
+        if (exc == null && inc != null) {
+            String[] str = stringSplit.stringSplit(inc);
+            return mapper.writeValueAsString(JsonView.with(userList)
+                    .onClass(User.class, match()
+                            .exclude(str)));
         }
         return mapper.writeValueAsString(JsonView.with(userList)
                 .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
