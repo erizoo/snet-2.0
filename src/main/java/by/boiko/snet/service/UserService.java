@@ -1,7 +1,6 @@
 package by.boiko.snet.service;
 
 
-import by.boiko.snet.StringSplit;
 import by.boiko.snet.model.User;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -74,7 +73,6 @@ public interface UserService {
      * @param limit params
      * @param exc params
      * @param inc params
-     * @param stringSplit params
      * @return list users
      */
     String getAllWithParams(int offset, int limit, String exc, String inc) throws JsonProcessingException;
