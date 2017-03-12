@@ -1,7 +1,6 @@
 package by.boiko.snet.controller;
 
 
-import by.boiko.snet.StringSplit;
 import by.boiko.snet.exception.ResourceNotFoundExceptionForGetUserId;
 import by.boiko.snet.model.User;
 import by.boiko.snet.service.UserService;
@@ -31,8 +30,8 @@ public class UserController {
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
-    public String getAllUsers(@RequestParam(value = "offset", required = false) int offset,
-                              @RequestParam(value = "limit", required = false) int limit,
+    public String getAllUsers(@RequestParam(value = "offset", required = false) Integer  offset,
+                              @RequestParam(value = "limit", required = false) Integer  limit,
                               @RequestParam(value = "inc", required = false) String inc,
                               @RequestParam(value = "exc", required = false) String exc) throws JsonProcessingException {
 

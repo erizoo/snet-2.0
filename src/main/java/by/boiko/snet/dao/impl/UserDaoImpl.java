@@ -22,16 +22,17 @@ public class UserDaoImpl implements UserDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public List<User> loadAllWithOffsetAndLimit(int offset, int limit) {
+    public List<User> loadAllWithOffsetAndLimit(Integer offset, Integer limit) {
         Query query = sessionFactory.getCurrentSession().createQuery("from User u");
-        if (offset != 0) {
-            query = query.setFirstResult(offset);
+        if (offset != null && offset > 0) {
+            query.setFirstResult(offset);
         }
-        if (limit != 0) {
-            query = query.setMaxResults(limit);
-        }else {
-            query = query.setFirstResult(offset).setMaxResults(limit);
+        if (limit != null && limit > 0) {
+            query.setMaxResults(limit);
+        } if (limit != null && offset != null){
+            query.setFirstResult(offset).setMaxResults(limit);
         }
+        
         return query.list();
     }
 

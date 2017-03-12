@@ -18,7 +18,7 @@ public interface UserDao {
      * @param limit the maximum number of entries
      * @return list all users
      */
-    List<User> loadAllWithOffsetAndLimit(int offset, int limit);
+    List<User> loadAllWithOffsetAndLimit(Integer offset, Integer limit);
 
     /**
      * Deletes a user from a storage by id.
