@@ -82,15 +82,11 @@ public class UserServiceImpl implements UserService {
         StringSplit stringSplit = new StringSplit();
         List<User> userList = userDao.loadAllWithOffsetAndLimit(offset, limit);
         ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
-        if (offset != null && limit == null && exc == null && inc == null) {
+        if (exc == null && inc == null) {
             return mapper.writeValueAsString(JsonView.with(userList)
                     .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
         }
-        if (offset == null && limit != null && exc == null && inc == null) {
-            return mapper.writeValueAsString(JsonView.with(userList)
-                    .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
-        }
-        if (offset == null && limit == null && exc != null && inc == null) {
+        if (exc != null && inc == null) {
             String[] str = stringSplit.stringSplit(exc);
             System.out.println(Arrays.toString(str));
             return mapper.writeValueAsString(JsonView.with(userList)
@@ -98,14 +94,11 @@ public class UserServiceImpl implements UserService {
                             .exclude("*")
                             .include(str)));
         }
-        if (offset == null && limit == null && exc == null && inc != null) {
+        if (exc == null && inc != null) {
             String[] str = stringSplit.stringSplit(inc);
             return mapper.writeValueAsString(JsonView.with(userList)
                     .onClass(User.class, match()
                             .exclude(str)));
-        }if (offset != null && limit != null && exc == null && inc == null) {
-            return mapper.writeValueAsString(JsonView.with(userList)
-                    .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
         }
         return mapper.writeValueAsString(JsonView.with(userList)
                 .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
