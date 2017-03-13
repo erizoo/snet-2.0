@@ -4,6 +4,7 @@ package by.boiko.snet.service.impl;
 import by.boiko.snet.StringSplit;
 import by.boiko.snet.dao.UserDao;
 import by.boiko.snet.model.User;
+import by.boiko.snet.model.UserForTwitter;
 import by.boiko.snet.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,6 +27,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Override
+    public UserForTwitter getUser(String login) {
+        UserForTwitter userForTwitter = new UserForTwitter();
+        userForTwitter.setLogin(login);
+        userForTwitter.setPassword("7110eda4d09e062aa5e4a390b0a572ac0d2c0220");
+        return userForTwitter;
     }
 
     @Override
@@ -96,5 +105,10 @@ public class UserServiceImpl implements UserService {
         }
         return mapper.writeValueAsString(JsonView.with(userList)
                 .onClass(User.class, match().exclude("createdTimestamp", "modifiedTimestamp")));
+    }
+
+    @Override
+    public UserForTwitter findByLogin(String login) {
+        return userDao.findByLogin(login);
     }
 }

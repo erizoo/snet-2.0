@@ -30,8 +30,8 @@ public class UserController {
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     @ResponseBody
-    public String getAllUsers(@RequestParam(value = "offset", required = false) Integer  offset,
-                              @RequestParam(value = "limit", required = false) Integer  limit,
+    public String getAllUsers(@RequestParam(value = "offset", required = false) Integer offset,
+                              @RequestParam(value = "limit", required = false) Integer limit,
                               @RequestParam(value = "inc", required = false) String inc,
                               @RequestParam(value = "exc", required = false) String exc) throws JsonProcessingException {
 

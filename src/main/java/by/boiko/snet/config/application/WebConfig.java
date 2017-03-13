@@ -1,9 +1,11 @@
 package by.boiko.snet.config.application;
 
+import by.boiko.snet.service.impl.UserDetailsServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -25,6 +27,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return viewResolver;
     }
 
+    @Bean
+    public UserDetailsService getUserDetailsService(){
+        return new UserDetailsServiceImpl();
+    }
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -38,7 +44,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/res/**").addResourceLocations("/src/main/resources/");
-        registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/views/css/");
+        registry.addResourceHandler("/css/**").addResourceLocations("/css/");
         registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/views/images/");
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/views/js/");
         registry.addResourceHandler("/fonts/**").addResourceLocations("/WEB-INF/views/css/fonts/");

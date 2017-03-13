@@ -3,6 +3,7 @@ package by.boiko.snet.dao.impl;
 
 import by.boiko.snet.dao.UserDao;
 import by.boiko.snet.model.User;
+import by.boiko.snet.model.UserForTwitter;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,5 +72,10 @@ public class UserDaoImpl implements UserDao {
     @Override
     public LocalDateTime getCreatedDate(int id) {
         return (LocalDateTime) sessionFactory.getCurrentSession().createQuery("select u.createdTimestamp from User u where id = :id").setParameter("id", id).uniqueResult();
+    }
+
+    @Override
+    public UserForTwitter findByLogin(String login) {
+        return (UserForTwitter) sessionFactory.getCurrentSession().createQuery("select u from UserForTwitter u where login = :login").setParameter("login", login).uniqueResult();
     }
 }
