@@ -6,6 +6,7 @@ import by.boiko.snet.model.User;
 import by.boiko.snet.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.List;
  */
 
 @Controller
+@PreAuthorize("hasRole('ROLE_WRITE')")
 public class UserController {
 
 
