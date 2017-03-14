@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@PreAuthorize ("hasRole('ROLE_WRITE')")
+@PreAuthorize("hasRole('USER')")
 public class AppController {
 
     @RequestMapping("/")

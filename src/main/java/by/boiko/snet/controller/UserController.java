@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 @Controller
-@PreAuthorize("hasRole('ROLE_WRITE')")
+@PreAuthorize("hasRole('USER')")
 public class UserController {
 
 

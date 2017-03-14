@@ -3,9 +3,9 @@ package by.boiko.snet.model;
 
 public enum UserRoleEnum {
 
-    ADMIN,
-    USER,
-    ANONYMOUS;
+    ROLE_ADMIN,
+    ROLE_USER,
+    ROLE_ANONYMOUS;
 
     UserRoleEnum() {
     }

@@ -24,9 +24,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         UserForTwitter userForTwitter = userService.findByLogin(login);
         HashSet<SimpleGrantedAuthority> roles = new HashSet<>();
-        roles.add(new SimpleGrantedAuthority(UserRoleEnum.USER.name()));
-        roles.add(new SimpleGrantedAuthority(UserRoleEnum.ADMIN.name()));
-        roles.add(new SimpleGrantedAuthority(UserRoleEnum.ANONYMOUS.name()));
+        roles.add(new SimpleGrantedAuthority(UserRoleEnum.ROLE_USER.name()));
+        roles.add(new SimpleGrantedAuthority(UserRoleEnum.ROLE_ADMIN.name()));
+        roles.add(new SimpleGrantedAuthority(UserRoleEnum.ROLE_ANONYMOUS.name()));
         return new org.springframework.security.core.userdetails.User(userForTwitter.getLogin(), userForTwitter.getPassword(), roles);
     }
 }
