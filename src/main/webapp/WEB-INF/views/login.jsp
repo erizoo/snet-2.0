@@ -15,6 +15,10 @@
     <!-- Bootstrap core CSS -->
     <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
     <link rel="stylesheet" href="${contextPath}/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="${contextPath}/css/bootstrap-social.css"/>
+    <link rel="stylesheet" href="${contextPath}/css/font-awesome.css"/>
+    <link rel="stylesheet" href="${contextPath}/css/docs.css"/>
+    <link rel="stylesheet" href="${contextPath}/css/bootstrap.css"/>
 
 </head>
 
@@ -27,6 +31,12 @@
         <input type="text" class="form-control" name="j_username" placeholder="Логин"><br>
         <input type="password" class="form-control" name="j_password" placeholder="Пароль"><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+        <!--Instagram-->
+        <button type="button" class="btn btn-block btn-social btn-instagram"> Sign in with Instagram</button>
+
+
+
+
     </form>
 
 </div>
