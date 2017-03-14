@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
         List<User> userList = userDao.loadAllWithOffsetAndLimit(offset, limit);
         ObjectMapper mapper = new ObjectMapper().registerModule(new JsonViewModule());
         if (exc != null && inc == null) {
-            String[] str = stringSplit.stringSplit(exc);
+            String[] str = stringSplit.stringSplit(exc);h
             return mapper.writeValueAsString(JsonView.with(userList)
                     .onClass(User.class, match()
                             .exclude("*")
@@ -108,6 +108,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserForTwitter findByLogin(String login) {
         return userDao.findByLogin(login);
     }

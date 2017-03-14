@@ -3,13 +3,27 @@ package by.boiko.snet.config;
 
 import by.boiko.snet.config.application.WebConfig;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.Filter;
-import javax.servlet.ServletRegistration;
+import javax.servlet.*;
+import java.util.EnumSet;
 
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        super.onStartup(servletContext);
+        FilterRegistration.Dynamic encodingFilter = servletContext.addFilter("encoding-filter", new CharacterEncodingFilter());
+        encodingFilter.setInitParameter("encoding", "UTF-8");
+        encodingFilter.setInitParameter("forceEncoding", "true");
+        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
+
+        FilterRegistration.Dynamic delegatingFilterProxy = servletContext.addFilter("springSecurityFilterChain", new DelegatingFilterProxy());
+        delegatingFilterProxy.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST,
+                DispatcherType.ERROR, DispatcherType.ASYNC), true, "/*");
+    }
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{WebConfig.class};
