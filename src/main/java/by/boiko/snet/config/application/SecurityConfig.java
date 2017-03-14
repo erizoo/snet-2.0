@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // указываем правила запросов
                 // по которым будет определятся доступ к ресурсам и остальным данным
                 .authorizeRequests()
-                .antMatchers( "/user**", "/user/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers( "/user**", "/user/**", "/connect/twitter ").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll()
                 .and();
 

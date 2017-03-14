@@ -25,20 +25,17 @@
 <body>
 
 <div class="container" style="width: 300px;">
-    <c:url value="/j_spring_security_check" var="loginUrl" />
+    <c:url value="/j_spring_security_check" var="loginUrl"/>
+    <c:url value="/connect/twitter" var="loginTwitter"/>
     <form action="${loginUrl}" method="post">
         <center><h2 class="form-signin-heading">S-net</h2></center>
         <input type="text" class="form-control" name="j_username" placeholder="Логин"><br>
         <input type="password" class="form-control" name="j_password" placeholder="Пароль"><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
-        <!--Instagram-->
-        <button type="button" class="btn btn-block btn-social btn-instagram"> Sign in with Instagram</button>
-
-
-
-
+        <form action="${loginTwitter}" method="post">
+            <button type="submit" class="btn btn-block btn-social btn-twitter" > Sign in with Twitter</button>
+        </form>
     </form>
-
 </div>
 
 </body>
