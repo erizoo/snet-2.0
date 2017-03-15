@@ -39,7 +39,7 @@ public class ApplicationTestConfig {
         dataSource.setDriver(new Driver());
         dataSource.setUrl("jdbc:mysql://localhost:3306/test?characterEncoding=utf8");
         dataSource.setUsername("root");
-        dataSource.setPassword("4123");
+        dataSource.setPassword("");
         return dataSource;
     }
 

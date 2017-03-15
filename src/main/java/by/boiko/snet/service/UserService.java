@@ -2,7 +2,6 @@ package by.boiko.snet.service;
 
 
 import by.boiko.snet.model.User;
-import by.boiko.snet.model.UserForTwitter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.time.LocalDateTime;
@@ -12,8 +11,6 @@ import java.util.List;
  * The interface determines the methods for work with User.
  */
 public interface UserService {
-
-    UserForTwitter getUser(String login);
 
     /**
      * Loads list of all users with params.
@@ -79,6 +76,4 @@ public interface UserService {
      * @return list users
      */
     String getAllWithParams(Integer  offset, Integer  limit, String exc, String inc) throws JsonProcessingException;
-
-    UserForTwitter findByLogin(String login);
 }

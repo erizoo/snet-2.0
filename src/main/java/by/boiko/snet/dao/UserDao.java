@@ -2,7 +2,6 @@ package by.boiko.snet.dao;
 
 
 import by.boiko.snet.model.User;
-import by.boiko.snet.model.UserForTwitter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -64,8 +63,6 @@ public interface UserDao {
      * @return creation date a user
      */
     LocalDateTime getCreatedDate(int id);
-
-    UserForTwitter findByLogin(String login);
 
     List<User> loadNames();
 }
