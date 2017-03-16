@@ -8,10 +8,7 @@ public class TwitterInfoUser {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-    @Column(name = "NAME")
-    private String name;
+    private long id;
 
     @Column(name = "NICK_NAME")
     private String nickName;
@@ -19,25 +16,16 @@ public class TwitterInfoUser {
     public TwitterInfoUser() {
     }
 
-    public TwitterInfoUser(String name) {
-        this.name = name;
-
+    public TwitterInfoUser(String nickName) {
+        this.nickName = nickName;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getNickName() {
@@ -47,4 +35,13 @@ public class TwitterInfoUser {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
+
+    @Override
+    public String toString() {
+        return "TwitterInfoUser{" +
+                "id=" + id +
+                ", nickName='" + nickName + '\'' +
+                '}';
+    }
 }
+

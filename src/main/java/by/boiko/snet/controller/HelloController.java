@@ -31,6 +31,6 @@ public class HelloController {
         Twitter twitter = new TwitterFactory().getInstance();
         System.out.println("key:" + twitter.getConfiguration().getOAuthConsumerKey());
         System.out.println("secret: " + twitter.getConfiguration().getOAuthConsumerSecret());
-        return "redirect:/users";
+        return "redirect:https://api.instagram.com";
     }
 }

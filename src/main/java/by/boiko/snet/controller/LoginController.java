@@ -19,9 +19,9 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/current", method = RequestMethod.POST)
-    @ResponseBody
-    public TwitterInfoUser loginPageTwitter(LoginTest loginTest) throws TwitterException {
-        return loginTest.main();
+    public String loginPageTwitter(LoginTest loginTest) {
+        String URL = loginTest.main();
+        return "redirect:" + URL;
     }
 
 }
