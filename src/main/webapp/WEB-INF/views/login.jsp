@@ -30,9 +30,9 @@
         <input type="text" class="form-control" name="j_username" placeholder="Логин"><br>
         <input type="password" class="form-control" name="j_password" placeholder="Пароль"><br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button></form>
-        <c:url value="/current" var="loginUrl" />
-        <form action="${loginUrl}" method="post"><br>
-            <button class="btn btn-social btn-twitter" type="submit">Sign in with Twitter</button>
+        <c:url value="/login/instagram" var="loginUrl" />
+        <form action="${loginUrl}"><br>
+            <button class="btn btn-social btn-instagram" type="submit">Sign in with Instagram</button>
 
     </form>
 
