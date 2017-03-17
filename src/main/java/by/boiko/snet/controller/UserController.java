@@ -18,8 +18,9 @@ import java.util.List;
  */
 
 @Controller
-@PreAuthorize("hasRole('USER')")
 public class UserController {
+
+
 
 
     @Autowired
