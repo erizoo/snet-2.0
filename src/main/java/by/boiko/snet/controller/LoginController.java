@@ -20,7 +20,7 @@ public class LoginController {
 
     private final static String CLIENT_ID = "0e37d7d0c3534a14a6d8448cdf5cef71";
     private final static String CLIENT_ID_SECRET = "629b16ba96a44b8db7ad34bbb54344aa";
-    private final static String REDIRECT_URI = "https://snet2.herokuapp.com/callback";
+    private final static String REDIRECT_URI = "http://snet2.herokuapp.com/callback";
 
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
